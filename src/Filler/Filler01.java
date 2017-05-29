@@ -5,5 +5,6 @@ public class Filler01 {
 		System.out.println("Bli bla blub");
 		System.out.println("Bla bli blosisdhbd");
 		int i;
+		int b;
 	}
 }
