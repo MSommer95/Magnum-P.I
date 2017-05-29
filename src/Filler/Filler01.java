@@ -7,6 +7,6 @@ public class Filler01 {
 
 		int b = 1;
 		int i = 1;
-
+		int u = 0;
 	}
 }
