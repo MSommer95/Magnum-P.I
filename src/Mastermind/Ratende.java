@@ -7,6 +7,8 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+//Der Ratende muss in 8 Versuchen die Folge erraten haben
+
 public class Ratende extends JFrame {
 	
 	private JButton filler;

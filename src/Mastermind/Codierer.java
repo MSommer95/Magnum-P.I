@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import javax.swing.event.*;
 
+//Der Codierer entscheidet sich für eine Farbfolge
+
 public class Codierer extends JFrame{
 	private Panel southP;
 	private Panel centerP;

@@ -6,6 +6,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
 
+//Menü für das Spiel (Spieler wählen ihre  Rolle)
+
 public class Menue extends JFrame {
 	private JButton codierer;
 	private JButton ratende;
