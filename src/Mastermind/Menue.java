@@ -9,6 +9,9 @@ import javax.swing.event.*;
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
 
 public class Menue extends JFrame {
+	
+	
+	
 	private JButton codierer;
 	private JButton ratende;
 	private Codierer code;
@@ -65,8 +68,8 @@ public class Menue extends JFrame {
 	private void initialisiereKomponenten(){
 		this.codierer = new JButton("Codierer");
 		this.ratende = new JButton("Ratende");
-		this.code = new Codierer();
-		this.raten = new Ratende();
+		
+		
 		this.openNewWindow = new OpenWindowListener();
 		
 		
@@ -111,12 +114,13 @@ public class Menue extends JFrame {
 	}
 		
 	private void openCodeWindow(){
-		this.code.setVisible(true);
-		this.setVisible(false);
+		this.code = new Codierer();
+		codierer.setVisible(false);
+		
 	}
 	private void openRatenWindow(){
-		this.raten.setVisible(true);
-		this.setVisible(false);
+		this.raten = new Ratende();
+		ratende.setVisible(false);
 	}
 
 	

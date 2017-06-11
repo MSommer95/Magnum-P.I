@@ -23,7 +23,7 @@ public class Ratende extends JFrame {
 	
 	private void initialisiereKomponenten(){
 		this.filler = new JButton("filler");
-		
+		this.setVisible(true);
 	}
 	private void ordneKomponentenAn(){
 		this.getContentPane().setLayout(new GridBagLayout());

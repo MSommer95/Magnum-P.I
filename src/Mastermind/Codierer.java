@@ -56,6 +56,7 @@ public class Codierer extends JFrame{
 		this.back = new BackListener();
 		
 		this.buttonsammler = new JButton[] {eins, zwei, drei, vier, fünf, sechs};
+		this.setVisible(true);
 	}
 	
 	
