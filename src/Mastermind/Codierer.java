@@ -24,11 +24,94 @@ public class Codierer extends JFrame {
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
-	private MouseListener back;
+	
 	private Menue menue;
 
 	private ChangeListener farbListener;
-
+	
+	
+	
+	//Getter und Setter 
+	public Color[] getFarbe() {
+		return farbe;
+	}
+	public void setFarbe(Color[] farbe) {
+		this.farbe = farbe;
+	}
+	public Panel getSouthP() {
+		return southP;
+	}
+	public void setSouthP(Panel southP) {
+		this.southP = southP;
+	}
+	public Panel getCenterP() {
+		return centerP;
+	}
+	public void setCenterP(Panel centerP) {
+		this.centerP = centerP;
+	}
+	public Panel getNorthP() {
+		return northP;
+	}
+	public void setNorthP(Panel northP) {
+		this.northP = northP;
+	}
+	public JButton[] getButtonsammler() {
+		return buttonsammler;
+	}
+	public void setButtonsammler(JButton[] buttonsammler) {
+		this.buttonsammler = buttonsammler;
+	}
+	public JButton getEins() {
+		return eins;
+	}
+	public void setEins(JButton eins) {
+		this.eins = eins;
+	}
+	public JButton getZwei() {
+		return zwei;
+	}
+	public void setZwei(JButton zwei) {
+		this.zwei = zwei;
+	}
+	public JButton getDrei() {
+		return drei;
+	}
+	public void setDrei(JButton drei) {
+		this.drei = drei;
+	}
+	public JButton getVier() {
+		return vier;
+	}
+	public void setVier(JButton vier) {
+		this.vier = vier;
+	}
+	public JSlider getSliderFarbe() {
+		return sliderFarbe;
+	}
+	public void setSliderFarbe(JSlider sliderFarbe) {
+		this.sliderFarbe = sliderFarbe;
+	}
+	public JSlider getSliderButton() {
+		return sliderButton;
+	}
+	public void setSliderButton(JSlider sliderButton) {
+		this.sliderButton = sliderButton;
+	}
+	public Menue getMenue() {
+		return menue;
+	}
+	public void setMenue(Menue menue) {
+		this.menue = menue;
+	}
+	public ChangeListener getFarbListener() {
+		return farbListener;
+	}
+	public void setFarbListener(ChangeListener farbListener) {
+		this.farbListener = farbListener;
+	}
+	
+	//Konstruktor für Codierer
 	public Codierer() {
 		super("Codierer Screen");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,7 +120,7 @@ public class Codierer extends JFrame {
 		this.ordneKomponentenAn();
 		this.registrierelistener();
 	}
-
+	//Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
 		this.southP = new Panel();
 		this.southP.setBackground(new Color(250, 240, 230));
@@ -60,44 +143,10 @@ public class Codierer extends JFrame {
 		this.sliderFarbe = this.erstelleSchieberegler(1, 6);
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
-		this.back = new BackListener();
-
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier };
 		this.setVisible(true);
 	}
-
-	private class BackListener implements MouseListener {
-
-		public void mouseClicked(MouseEvent e) {
-			back();
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-	}
-
+	//Innere Klasse für die Slider Listener
 	private class FarbListener implements ChangeListener {
 
 		public void stateChanged(ChangeEvent e) {
@@ -105,19 +154,18 @@ public class Codierer extends JFrame {
 		}
 
 	}
-
-	private void back() {
-	}
-
+	//Methode für den Slider Listener (läuft die Buttons durch und wählt eine Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht bekannt)
 	private void farbe() {
 		int i = sliderFarbe.getValue() - 1;
 		buttonsammler[sliderButton.getValue() - 1].setBackground(farbe[i]);
 	}
 
+	
+	//Übergibt den Komponenten die Listener
 	private void registrierelistener() {
 		this.sliderFarbe.addChangeListener(this.farbListener);
 	}
-
+	//Methode zum Erstellen der Slider
 	private JSlider erstelleSchieberegler(int minimum, int maximum) {
 		JSlider schieberegler = new JSlider(minimum, maximum);
 		schieberegler.setPaintLabels(true);
@@ -125,11 +173,12 @@ public class Codierer extends JFrame {
 		schieberegler.setMajorTickSpacing(1);
 		return schieberegler;
 	}
-
+	//Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
-
+		
 		southP.add(sliderFarbe);
 		southP.add(sliderButton);
+		
 		add(southP, BorderLayout.SOUTH);
 		add(northP, BorderLayout.NORTH);
 
