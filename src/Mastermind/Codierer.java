@@ -21,6 +21,8 @@ public class Codierer extends JFrame {
 	private JButton zwei;
 	private JButton drei;
 	private JButton vier;
+	private JButton bestätigen;
+	private Color[]	bcolor;
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
@@ -28,6 +30,7 @@ public class Codierer extends JFrame {
 	private Menue menue;
 
 	private ChangeListener farbListener;
+	private MouseListener bestätigenListener;
 	
 	
 	
@@ -61,6 +64,12 @@ public class Codierer extends JFrame {
 	}
 	public void setButtonsammler(JButton[] buttonsammler) {
 		this.buttonsammler = buttonsammler;
+	}
+	public Color[] getBcolor() {
+		return bcolor;
+	}
+	public void setBcolor(Color[] bcolor) {
+		this.bcolor = bcolor;
 	}
 	public JButton getEins() {
 		return eins;
@@ -132,14 +141,16 @@ public class Codierer extends JFrame {
 		this.northP.setBackground(new Color(150, 0, 190));
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
-
+		
 		this.eins = new JButton("eins");
 		this.zwei = new JButton("zwei");
 		this.drei = new JButton("drei");
 		this.vier = new JButton("vier");
-
+		this.bestätigen = new JButton("Bestätigen");
+		
 		this.farbListener = new FarbListener();
-
+		this.bestätigenListener = new BestätigenListener();
+		
 		this.sliderFarbe = this.erstelleSchieberegler(1, 6);
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
@@ -147,6 +158,39 @@ public class Codierer extends JFrame {
 		this.setVisible(true);
 	}
 	//Innere Klasse für die Slider Listener
+	private class BestätigenListener implements MouseListener {
+		
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			bestätigen();
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
 	private class FarbListener implements ChangeListener {
 
 		public void stateChanged(ChangeEvent e) {
@@ -155,6 +199,13 @@ public class Codierer extends JFrame {
 
 	}
 	//Methode für den Slider Listener (läuft die Buttons durch und wählt eine Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht bekannt)
+	private void bestätigen(){
+		this.bcolor = new Color[] {this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(), this.vier.getBackground()};
+		for(int i=0; i<bcolor.length; i++){
+		System.out.println(this.bcolor[i]);
+	
+		}
+	}
 	private void farbe() {
 		int i = sliderFarbe.getValue() - 1;
 		buttonsammler[sliderButton.getValue() - 1].setBackground(farbe[i]);
@@ -164,6 +215,7 @@ public class Codierer extends JFrame {
 	//Übergibt den Komponenten die Listener
 	private void registrierelistener() {
 		this.sliderFarbe.addChangeListener(this.farbListener);
+		this.bestätigen.addMouseListener(this.bestätigenListener);
 	}
 	//Methode zum Erstellen der Slider
 	private JSlider erstelleSchieberegler(int minimum, int maximum) {
@@ -183,9 +235,10 @@ public class Codierer extends JFrame {
 		add(northP, BorderLayout.NORTH);
 
 		for (int i = 0; i < buttonsammler.length; i++)
-			centerP.add(buttonsammler[i]);
+			northP.add(buttonsammler[i]);
 
 		add(centerP, BorderLayout.CENTER);
+		centerP.add(bestätigen);
 
 	}
 
