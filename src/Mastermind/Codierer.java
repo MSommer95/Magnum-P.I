@@ -12,7 +12,8 @@ import javax.swing.event.*;
 public class Codierer extends JFrame {
 
 	private Color[] farbe;
-
+	private Color[]	ccolor;
+	
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
@@ -22,12 +23,10 @@ public class Codierer extends JFrame {
 	private JButton drei;
 	private JButton vier;
 	private JButton bestätigen;
-	private Color[]	bcolor;
+	
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
-	
-	private Menue menue;
 
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
@@ -65,11 +64,11 @@ public class Codierer extends JFrame {
 	public void setButtonsammler(JButton[] buttonsammler) {
 		this.buttonsammler = buttonsammler;
 	}
-	public Color[] getBcolor() {
-		return bcolor;
+	public Color[] getCcolor() {
+		return ccolor;
 	}
-	public void setBcolor(Color[] bcolor) {
-		this.bcolor = bcolor;
+	public void setCcolor(Color[] ccolor) {
+		this.ccolor = ccolor;
 	}
 	public JButton getEins() {
 		return eins;
@@ -107,12 +106,7 @@ public class Codierer extends JFrame {
 	public void setSliderButton(JSlider sliderButton) {
 		this.sliderButton = sliderButton;
 	}
-	public Menue getMenue() {
-		return menue;
-	}
-	public void setMenue(Menue menue) {
-		this.menue = menue;
-	}
+
 	public ChangeListener getFarbListener() {
 		return farbListener;
 	}
@@ -128,7 +122,10 @@ public class Codierer extends JFrame {
 		this.initialisiereKomponenten();
 		this.ordneKomponentenAn();
 		this.registrierelistener();
+		this.setVisible(true);
 	}
+	
+	
 	//Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
 		this.southP = new Panel();
@@ -155,7 +152,7 @@ public class Codierer extends JFrame {
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier };
-		this.setVisible(true);
+		
 	}
 	//Innere Klasse für die Slider Listener
 	private class BestätigenListener implements MouseListener {
@@ -200,9 +197,9 @@ public class Codierer extends JFrame {
 	}
 	//Methode für den Slider Listener (läuft die Buttons durch und wählt eine Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht bekannt)
 	private void bestätigen(){
-		this.bcolor = new Color[] {this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(), this.vier.getBackground()};
-		for(int i=0; i<bcolor.length; i++){
-		System.out.println(this.bcolor[i]);
+		this.ccolor = new Color[] {this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(), this.vier.getBackground()};
+		for(int i=0; i<ccolor.length; i++){
+		System.out.println(this.ccolor[i]);
 	
 		}
 	}

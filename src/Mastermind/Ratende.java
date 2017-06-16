@@ -20,8 +20,16 @@ import javax.swing.event.ChangeListener;
 
 public class Ratende extends JFrame {
 	private Color[] farbe;
-	private Color[] ccolor;
+	private Color[] rcolor;
 	
+	
+	
+	public Color[] getRcolor() {
+		return rcolor;
+	}
+	public void setRcolor(Color[] rcolor) {
+		this.rcolor = rcolor;
+	}
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
@@ -48,8 +56,6 @@ public class Ratende extends JFrame {
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
-	
-	private Menue menue;
 
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
@@ -67,6 +73,7 @@ public class Ratende extends JFrame {
 		this.initialisiereKomponenten();
 		this.ordneKomponentenAn();
 		this.registrierelistener();
+		this.setVisible(true);
 	}
 	//Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
@@ -80,7 +87,9 @@ public class Ratende extends JFrame {
 		this.northP.setBackground(new Color(150, 0, 190));
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
+		
 
+		
 		this.eins = new JButton("eins");
 		this.zwei = new JButton("zwei");
 		this.drei = new JButton("drei");
@@ -106,7 +115,6 @@ public class Ratende extends JFrame {
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier,fünf,sechs,sieben,acht,neun,zehn,elf,zwölf,dreizehn,vierzehn,fünfzehn,sechzehn };
-		this.setVisible(true);
 	}
 	//Innere Klasse für die Slider Listener
 	//Listener für den Bestätien Button
@@ -115,6 +123,7 @@ private class BestätigenListener implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			bestätigen();
+			
 		}
 
 		@Override
@@ -144,10 +153,12 @@ private class BestätigenListener implements MouseListener {
 	}
 	//Methode zum Einlesen der Farben
 	private void bestätigen(){
-		this.ccolor = new Color[] {this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(), this.vier.getBackground()};
-		for(int i=0; i<ccolor.length; i++){
-		System.out.println(this.ccolor[i]);
+		this.rcolor = new Color[] {this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(), this.vier.getBackground()};
+		for(int i=0; i<rcolor.length;i++){
+			System.out.println(rcolor[i]);
+			
 		}
+		
 	}
 	//Listener f[r die Slider
 	private class FarbListener implements ChangeListener {
@@ -169,6 +180,9 @@ private class BestätigenListener implements MouseListener {
 		this.sliderFarbe.addChangeListener(this.farbListener);
 		this.bestätigen.addMouseListener(this.bestätigenListener);
 	}
+	
+
+	
 	//Methode zum Erstellen der Slider
 	private JSlider erstelleSchieberegler(int minimum, int maximum) {
 		JSlider schieberegler = new JSlider(minimum, maximum);

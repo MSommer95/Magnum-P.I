@@ -9,13 +9,14 @@ import javax.swing.event.*;
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
 
 public class Menue extends JFrame {
-
 	private JButton codierer;
 	private JButton ratende;
+	private JButton round;
 	private Codierer code;
 	private Ratende raten;
 	private MouseListener openNewWindow;
-
+	private MouseListener closeRound;
+	
 	
 	//Getter und Setter 
 	public JButton getCodierer() {
@@ -69,12 +70,14 @@ public class Menue extends JFrame {
 		this.setVisible(true);
 	}
 	////Initialisiert die Komponenten von Menue
+	
 	private void initialisiereKomponenten() {
 		this.codierer = new JButton("Codierer");
 		this.ratende = new JButton("Ratende");
-
+		this.round = new JButton("Round");
+		
 		this.openNewWindow = new OpenWindowListener();
-
+		this.closeRound = new CloseRoundListener();
 	}
 	//Innere Klasse für das Öffnen eines neues Fensters 
 	private class OpenWindowListener implements MouseListener {
@@ -113,7 +116,54 @@ public class Menue extends JFrame {
 
 		}
 	}
+	private class CloseRoundListener implements MouseListener {
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			round();
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 	
+	//Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
+	private void round(){
+		for(int i = 0; i<code.getCcolor().length;i++){
+			if(code.getCcolor()[i] == raten.getRcolor()[i]){
+				System.out.println("right position " + code.getCcolor()[i]);
+			}
+				
+			for(int j = 0;j<raten.getRcolor().length;j++){
+			if(code.getCcolor()[i] == raten.getRcolor()[j]){
+				System.out.println("same color"+code.getCcolor()[i]);
+			}
+			}
+		}
+		}
 	//Methode legt ein neues Objekt Codierer an und blendet danach den Button aus
 	private void openCodeWindow() {
 		this.code = new Codierer();
@@ -129,6 +179,8 @@ public class Menue extends JFrame {
 	private void registrierelistener() {
 		this.codierer.addMouseListener(this.openNewWindow);
 		this.ratende.addMouseListener(this.openNewWindow);
+		
+		this.round.addMouseListener(this.closeRound);
 
 	}
 	//Methode zum Ordnen der Komponenten
@@ -144,9 +196,12 @@ public class Menue extends JFrame {
 
 		c.gridy = 2;
 		this.getContentPane().add(ratende, c);
+		
+		c.gridy = 3;
+		this.getContentPane().add(round, c);
 	}
-
-	public static void main(String[] args) {
-		Menue m = new Menue();
-	}
+public static void main(String[] args){
+	Menue m = new Menue();
+}
+	
 }
