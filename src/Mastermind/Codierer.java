@@ -14,6 +14,8 @@ public class Codierer extends JFrame {
 	private Color[] farbe;
 	private Color[] ccolor;
 
+	private int counter;
+	
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
@@ -172,7 +174,8 @@ public class Codierer extends JFrame {
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier };
-
+		
+		this.counter = 0;
 	}
 
 	// Innere Klasse für die Slider Listener
@@ -223,6 +226,18 @@ public class Codierer extends JFrame {
 	private void bestätigen() {
 		this.ccolor = new Color[] { this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(),
 				this.vier.getBackground() };
+		for(int i = 0; i<this.ccolor.length;i++){
+			for(int j = 0; j<this.ccolor.length;j++){
+				if(this.ccolor[i]==this.ccolor[j]){
+					this.counter++;
+				}
+			}
+		}
+		System.out.println(this.counter);
+		if(counter>4){
+			System.out.println("Doppelte Farben sind nicht erlaubt. Bitte wähle eine andere Farbfolge.");
+		}
+		this.counter = 0;
 	}
 
 	private void farbe() {

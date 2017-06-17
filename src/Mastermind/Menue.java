@@ -166,15 +166,16 @@ public class Menue extends JFrame {
 		for (int i = 0; i < code.getCcolor().length; i++) {
 			if (code.getCcolor()[i] == raten.getRcolor()[i]) {
 				this.rightp++;
+				this.rightc--;
 			}
 
 			for (int j = 0; j < raten.getRcolor().length; j++) {
 				if (code.getCcolor()[i] == raten.getRcolor()[j]) {
 					this.rightc++;
-				}
+					}
 			}
 		}
-		this.rightc = this.rightc - this.rightp;
+
 		System.out.println("Richtige Farbe " + this.rightc);
 		System.out.println("Richtige Position und Farbe " + this.rightp);
 		this.rightc = 0;

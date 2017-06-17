@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -29,7 +30,9 @@ public class Ratende extends JFrame {
 	public void setRcolor(Color[] rcolor) {
 		this.rcolor = rcolor;
 	}
-
+	
+	private JLabel labelSliderButton;
+	private JLabel labelSliderFarbe;
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
@@ -51,6 +54,23 @@ public class Ratende extends JFrame {
 	private JButton vierzehn;
 	private JButton fünfzehn;
 	private JButton sechzehn;
+	private JButton siebzehn;
+	private JButton achtzehn;
+	private JButton neunzehn;
+	private JButton zwanzig;
+	private JButton einundzwanzig;
+	private JButton zweiundzwanzig;
+	private JButton dreiundzwanzig;
+	private JButton vierundzwanzig;
+	private JButton fünfundzwanzig;
+	private JButton sechsundzwanzig;
+	private JButton siebenundzwanzig;
+	private JButton achtundzwanzig;
+	private JButton neunundzwanzig;
+	private JButton dreißig;
+	private JButton einunddreißig;
+	private JButton zweiunddreißig;
+
 	private JButton bestätigen;
 
 	private JSlider sliderFarbe;
@@ -102,24 +122,43 @@ public class Ratende extends JFrame {
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 		this.rcolor = new Color[4];
 
-		this.eins = new JButton("eins");
-		this.zwei = new JButton("zwei");
-		this.drei = new JButton("drei");
-		this.vier = new JButton("vier");
-		this.fünf = new JButton("fünf");
-		this.sechs = new JButton("sechs");
-		this.sieben = new JButton("sieben");
-		this.acht = new JButton("acht");
-		this.neun = new JButton("neun");
-		this.zehn = new JButton("zehn");
-		this.elf = new JButton("elf");
-		this.zwölf = new JButton("zwölf");
-		this.dreizehn = new JButton("dreizehn");
-		this.vierzehn = new JButton("vierzehn");
-		this.fünfzehn = new JButton("fünfzehn");
-		this.sechzehn = new JButton("sechzehn");
+		this.eins = new JButton("1");
+		this.zwei = new JButton("2");
+		this.drei = new JButton("3");
+		this.vier = new JButton("4");
+		this.fünf = new JButton("5");
+		this.sechs = new JButton("6");
+		this.sieben = new JButton("7");
+		this.acht = new JButton("8");
+		this.neun = new JButton("9");
+		this.zehn = new JButton("10");
+		this.elf = new JButton("11");
+		this.zwölf = new JButton("12");
+		this.dreizehn = new JButton("13");
+		this.vierzehn = new JButton("14");
+		this.fünfzehn = new JButton("15");
+		this.sechzehn = new JButton("16");
+		this.siebzehn = new JButton("17");
+		this.achtzehn = new JButton("18");
+		this.neunzehn = new JButton("19");
+		this.zwanzig = new JButton("20");
+		this.einundzwanzig = new JButton("21");
+		this.zweiundzwanzig = new JButton("22");
+		this.dreiundzwanzig = new JButton("23");
+		this.vierundzwanzig = new JButton("24");
+		this.fünfundzwanzig = new JButton("25");
+		this.sechsundzwanzig = new JButton("26");
+		this.siebenundzwanzig = new JButton("27");
+		this.achtundzwanzig = new JButton("28");
+		this.neunundzwanzig = new JButton("29");
+		this.dreißig = new JButton("30");
+		this.einunddreißig = new JButton("31");
+		this.zweiunddreißig = new JButton("32");
 		this.bestätigen = new JButton("Bestätigen");
-
+		
+		this.labelSliderButton = new JLabel("Button-Slider");
+		this.labelSliderFarbe = new JLabel("Button-Farbe");
+		
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
 
@@ -127,7 +166,9 @@ public class Ratende extends JFrame {
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
-				dreizehn, vierzehn, fünfzehn, sechzehn };
+				dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
+				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, fünfundzwanzig, sechsundzwanzig, siebenundzwanzig,
+				achtundzwanzig, neunundzwanzig, dreißig, einunddreißig, zweiunddreißig };
 	}
 
 	// Innere Klasse für die Slider Listener
@@ -168,6 +209,7 @@ public class Ratende extends JFrame {
 
 	// Methode zum Einlesen der Farben
 	private void bestätigen() {
+		
 		for (int i = 0; i < 4; i++) {
 			this.rcolor[i] = this.buttonsammler[i + (4 * this.runde)].getBackground();
 		}
@@ -209,39 +251,72 @@ public class Ratende extends JFrame {
 	// Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
 
-		southP.add(sliderFarbe);
-		southP.add(bestätigen);
-		southP.add(sliderButton);
+		
 
 		add(southP, BorderLayout.SOUTH);
-		add(northP, BorderLayout.NORTH);
-
-		add(centerP, BorderLayout.CENTER);
-		centerP.setLayout(new GridBagLayout());
+		southP.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(4, 4, 4, 4);
-
+		
+		southP.add(labelSliderFarbe, c);
+		
+		c.gridy = 1;
+		southP.add(sliderFarbe,c);
+		
+		c.gridy = 0;
+		c.gridx = 2;
+		southP.add(bestätigen,c);
+		
+		c.gridx = 3;
+		southP.add(labelSliderButton, c);
+		c.gridy = 1;
+		southP.add(sliderButton,c);
+		
+		add(northP, BorderLayout.NORTH);
+		c.gridx = 1;
+		c.gridy= 0;
+		add(centerP, BorderLayout.CENTER);
+		
+		centerP.setLayout(new GridBagLayout());
+		
+		GridBagConstraints d = new GridBagConstraints();
+		d.fill = GridBagConstraints.HORIZONTAL;
+		d.insets = new Insets(4, 4, 4, 4);
 		for (int i = 0; i <= buttonsammler.length; i++) {
 			if (i <= 3) {
-				c.gridy = 4;
-				centerP.add(buttonsammler[i], c);
+				d.gridy = 8;
+				centerP.add(buttonsammler[i], d);
 			}
 			if (i > 3 && i <= 7) {
-				c.gridy = 3;
-				centerP.add(buttonsammler[i], c);
+				d.gridy = 7;
+				centerP.add(buttonsammler[i], d);
 			}
 			if (i > 7 && i <= 11) {
-				c.gridy = 2;
-				centerP.add(buttonsammler[i], c);
+				d.gridy = 6;
+				centerP.add(buttonsammler[i], d);
 			}
 			if (i > 11 && i <= 15) {
-				c.gridy = 1;
-				centerP.add(buttonsammler[i], c);
+				d.gridy = 5;
+				centerP.add(buttonsammler[i], d);
 			}
-
+			if (i > 15 && i <= 19) {
+				d.gridy = 4;
+				centerP.add(buttonsammler[i], d);
+			}
+			if (i > 19 && i <= 23) {
+				d.gridy = 3;
+				centerP.add(buttonsammler[i], d);
+			}
+			if (i > 23 && i <= 27) {
+				d.gridy = 2;
+				centerP.add(buttonsammler[i], d);
+			}
+			if (i > 27 && i <= 31) {
+				d.gridy = 1;
+				centerP.add(buttonsammler[i], d);
+			}
 		}
-
 	}
 
 }
