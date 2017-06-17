@@ -59,7 +59,7 @@ public class Ratende extends JFrame {
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
 
-	//getter setter
+	// getter setter
 	public JSlider getSliderFarbe() {
 		return sliderFarbe;
 	}
@@ -75,7 +75,6 @@ public class Ratende extends JFrame {
 	public void setSliderButton(JSlider sliderButton) {
 		this.sliderButton = sliderButton;
 	}
-
 
 	// Konstruktor für Codierer
 	public Ratende() {
@@ -102,7 +101,7 @@ public class Ratende extends JFrame {
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 		this.rcolor = new Color[4];
-		
+
 		this.eins = new JButton("eins");
 		this.zwei = new JButton("zwei");
 		this.drei = new JButton("drei");
@@ -169,10 +168,10 @@ public class Ratende extends JFrame {
 
 	// Methode zum Einlesen der Farben
 	private void bestätigen() {
-		for(int i = 0; i<4;i++){
-		this.rcolor[i] = this.buttonsammler[i+(4*this.runde)].getBackground();
+		for (int i = 0; i < 4; i++) {
+			this.rcolor[i] = this.buttonsammler[i + (4 * this.runde)].getBackground();
 		}
-		this.runde ++;
+		this.runde++;
 	}
 
 	// Listener f[r die Slider
@@ -189,7 +188,7 @@ public class Ratende extends JFrame {
 	// bekannt)
 	private void farbe() {
 		int i = sliderFarbe.getValue() - 1;
-		buttonsammler[sliderButton.getValue() - 1 +4*this.runde].setBackground(farbe[i]);
+		buttonsammler[sliderButton.getValue() - 1 + 4 * this.runde].setBackground(farbe[i]);
 	}
 
 	// Übergibt den Komponenten die Listener

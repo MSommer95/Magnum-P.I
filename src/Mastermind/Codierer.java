@@ -223,7 +223,7 @@ public class Codierer extends JFrame {
 	private void bestätigen() {
 		this.ccolor = new Color[] { this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(),
 				this.vier.getBackground() };
-			}
+	}
 
 	private void farbe() {
 		int i = sliderFarbe.getValue() - 1;
@@ -259,7 +259,6 @@ public class Codierer extends JFrame {
 			centerP.add(buttonsammler[i]);
 
 		add(centerP, BorderLayout.CENTER);
-		
 
 	}
 

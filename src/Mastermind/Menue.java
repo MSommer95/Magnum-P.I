@@ -8,7 +8,6 @@ import javax.swing.event.*;
 //Erklärung (Zwischenstand):
 //Der Codierer und der Ratende müssen beide auf Bestätigen geklickt haben, bevor die Runde beendet werden kann (Sonst NullPointerExeption)
 
-
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
 
 public class Menue extends JFrame {
@@ -163,7 +162,7 @@ public class Menue extends JFrame {
 
 	// Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
 	private void round() {
-		
+
 		for (int i = 0; i < code.getCcolor().length; i++) {
 			if (code.getCcolor()[i] == raten.getRcolor()[i]) {
 				this.rightp++;
@@ -180,7 +179,7 @@ public class Menue extends JFrame {
 		System.out.println("Richtige Position und Farbe " + this.rightp);
 		this.rightc = 0;
 		this.rightp = 0;
-		this.runde ++;
+		this.runde++;
 
 		System.out.println(this.runde);
 	}
@@ -228,6 +227,7 @@ public class Menue extends JFrame {
 
 	public static void main(String[] args) {
 		Menue m = new Menue();
+		
 	}
 
 }
