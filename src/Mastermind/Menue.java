@@ -69,7 +69,7 @@ public class Menue extends JFrame {
 		this.ordneKomponentenAn();
 		this.setVisible(true);
 	}
-	////Initialisiert die Komponenten von Menue
+	//Initialisiert die Komponenten von Menue
 	
 	private void initialisiereKomponenten() {
 		this.codierer = new JButton("Codierer");
@@ -116,6 +116,8 @@ public class Menue extends JFrame {
 
 		}
 	}
+	
+	//Listener zum Beenden der Runde
 	private class CloseRoundListener implements MouseListener {
 
 		@Override
