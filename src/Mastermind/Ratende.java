@@ -15,26 +15,26 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
 //Der Ratende muss in 8 Versuchen die Folge erraten haben
 
 public class Ratende extends JFrame {
 	private Color[] farbe;
 	private Color[] rcolor;
-	
-	
-	
+	private int runde;
+
 	public Color[] getRcolor() {
 		return rcolor;
 	}
+
 	public void setRcolor(Color[] rcolor) {
 		this.rcolor = rcolor;
 	}
+
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
 	private JButton[] buttonsammler;
-	
+
 	private JButton eins;
 	private JButton zwei;
 	private JButton drei;
@@ -52,20 +52,32 @@ public class Ratende extends JFrame {
 	private JButton fünfzehn;
 	private JButton sechzehn;
 	private JButton bestätigen;
-	
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
 
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
-	
-	
-	
-	//Getter und Setter 
-	
-	
-	//Konstruktor für Codierer
+
+	//getter setter
+	public JSlider getSliderFarbe() {
+		return sliderFarbe;
+	}
+
+	public void setSliderFarbe(JSlider sliderFarbe) {
+		this.sliderFarbe = sliderFarbe;
+	}
+
+	public JSlider getSliderButton() {
+		return sliderButton;
+	}
+
+	public void setSliderButton(JSlider sliderButton) {
+		this.sliderButton = sliderButton;
+	}
+
+
+	// Konstruktor für Codierer
 	public Ratende() {
 		super("Ratende Screen");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -75,8 +87,10 @@ public class Ratende extends JFrame {
 		this.registrierelistener();
 		this.setVisible(true);
 	}
-	//Initialisiert die Komponenten von Codierer
+
+	// Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
+		this.runde = 0;
 		this.southP = new Panel();
 		this.southP.setBackground(new Color(250, 240, 230));
 
@@ -87,8 +101,7 @@ public class Ratende extends JFrame {
 		this.northP.setBackground(new Color(150, 0, 190));
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
-		
-
+		this.rcolor = new Color[4];
 		
 		this.eins = new JButton("eins");
 		this.zwei = new JButton("zwei");
@@ -114,53 +127,55 @@ public class Ratende extends JFrame {
 		this.sliderFarbe = this.erstelleSchieberegler(1, 6);
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
-		this.buttonsammler = new JButton[] { eins, zwei, drei, vier,fünf,sechs,sieben,acht,neun,zehn,elf,zwölf,dreizehn,vierzehn,fünfzehn,sechzehn };
+		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
+				dreizehn, vierzehn, fünfzehn, sechzehn };
 	}
-	//Innere Klasse für die Slider Listener
-	//Listener für den Bestätien Button
-private class BestätigenListener implements MouseListener {
-		
+
+	// Innere Klasse für die Slider Listener
+	// Listener für den Bestätien Button
+	private class BestätigenListener implements MouseListener {
+
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
 			bestätigen();
-			
+
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
-		
+
 	}
-	//Methode zum Einlesen der Farben
-	private void bestätigen(){
-		this.rcolor = new Color[] {this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(), this.vier.getBackground()};
-		for(int i=0; i<rcolor.length;i++){
-			System.out.println(rcolor[i]);
-			
+
+	// Methode zum Einlesen der Farben
+	private void bestätigen() {
+		for(int i = 0; i<4;i++){
+		this.rcolor[i] = this.buttonsammler[i+(4*this.runde)].getBackground();
 		}
-		
+		this.runde ++;
 	}
-	//Listener f[r die Slider
+
+	// Listener f[r die Slider
 	private class FarbListener implements ChangeListener {
 
 		public void stateChanged(ChangeEvent e) {
@@ -168,22 +183,22 @@ private class BestätigenListener implements MouseListener {
 		}
 
 	}
-	//Methode für den Slider Listener (läuft die Buttons durch und wählt eine Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht bekannt)
+
+	// Methode für den Slider Listener (läuft die Buttons durch und wählt eine
+	// Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht
+	// bekannt)
 	private void farbe() {
 		int i = sliderFarbe.getValue() - 1;
-		buttonsammler[sliderButton.getValue() - 1].setBackground(farbe[i]);
+		buttonsammler[sliderButton.getValue() - 1 +4*this.runde].setBackground(farbe[i]);
 	}
 
-	
-	//Übergibt den Komponenten die Listener
+	// Übergibt den Komponenten die Listener
 	private void registrierelistener() {
 		this.sliderFarbe.addChangeListener(this.farbListener);
 		this.bestätigen.addMouseListener(this.bestätigenListener);
 	}
-	
 
-	
-	//Methode zum Erstellen der Slider
+	// Methode zum Erstellen der Slider
 	private JSlider erstelleSchieberegler(int minimum, int maximum) {
 		JSlider schieberegler = new JSlider(minimum, maximum);
 		schieberegler.setPaintLabels(true);
@@ -191,41 +206,43 @@ private class BestätigenListener implements MouseListener {
 		schieberegler.setMajorTickSpacing(1);
 		return schieberegler;
 	}
-	//Organisationsmethode für die Komponenten (Darstellung)
+
+	// Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
-		
+
 		southP.add(sliderFarbe);
 		southP.add(bestätigen);
 		southP.add(sliderButton);
-		
+
 		add(southP, BorderLayout.SOUTH);
 		add(northP, BorderLayout.NORTH);
-		
-		
-		
+
 		add(centerP, BorderLayout.CENTER);
 		centerP.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(4,4,4,4);
-		
-		for (int i = 0 ; i <= buttonsammler.length; i++){
-			if(i<=3){
+		c.insets = new Insets(4, 4, 4, 4);
+
+		for (int i = 0; i <= buttonsammler.length; i++) {
+			if (i <= 3) {
 				c.gridy = 4;
-				centerP.add(buttonsammler[i], c);}
-			if(i>3 && i<=7){
+				centerP.add(buttonsammler[i], c);
+			}
+			if (i > 3 && i <= 7) {
 				c.gridy = 3;
-				centerP.add(buttonsammler[i], c);}
-			if(i>7 && i<=11){
+				centerP.add(buttonsammler[i], c);
+			}
+			if (i > 7 && i <= 11) {
 				c.gridy = 2;
-				centerP.add(buttonsammler[i], c);}
-			if(i>11 && i<=15){
+				centerP.add(buttonsammler[i], c);
+			}
+			if (i > 11 && i <= 15) {
 				c.gridy = 1;
-				centerP.add(buttonsammler[i], c);}
-			
-			
+				centerP.add(buttonsammler[i], c);
+			}
+
 		}
-	
+
 	}
 
 }
