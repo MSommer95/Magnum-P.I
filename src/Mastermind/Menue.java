@@ -11,14 +11,18 @@ import javax.swing.event.*;
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
 
 public class Menue extends JFrame {
+
 	private int rightp;
 	private int rightc;
+	private int runde;
+
 	private JButton codierer;
 	private JButton ratende;
 	private JButton round;
-	private int runde;
+
 	private Codierer code;
 	private Ratende raten;
+
 	private MouseListener openNewWindow;
 	private MouseListener closeRound;
 
@@ -76,9 +80,11 @@ public class Menue extends JFrame {
 	// Initialisiert die Komponenten von Menue
 
 	private void initialisiereKomponenten() {
+
 		this.rightp = 0;
 		this.rightc = 0;
 		this.runde = 0;
+
 		this.codierer = new JButton("Codierer");
 		this.ratende = new JButton("Ratende");
 		this.round = new JButton("Runde Beenden");
@@ -162,40 +168,50 @@ public class Menue extends JFrame {
 
 	// Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
 	private void round() {
-	if(code.getBestätigt()>0&&raten.getBestätigt()>0){
-		for (int i = 0; i < code.getCcolor().length; i++) {
-			if (code.getCcolor()[i] == raten.getRcolor()[i]) {
-				this.rightp++;
-				this.rightc--;
-			}
+		if (code.getBestätigt() > 0 && raten.getBestätigt() > 0) {
 
-			for (int j = 0; j < raten.getRcolor().length; j++) {
-				if (code.getCcolor()[i] == raten.getRcolor()[j]) {
-					this.rightc++;
+			for (int i = 0; i < code.getCcolor().length; i++) {
+
+				if (code.getCcolor()[i] == raten.getRcolor()[i]) {
+					this.rightp++;
+					this.rightc--;
+				}
+
+				for (int j = 0; j < raten.getRcolor().length; j++) {
+
+					if (code.getCcolor()[i] == raten.getRcolor()[j]) {
+
+						this.rightc++;
+					}
 				}
 			}
-		}
 
-		System.out.println("Richtige Farbe " + this.rightc);
-		System.out.println("Richtige Position und Farbe " + this.rightp);
-		this.rightc = 0;
-		this.rightp = 0;
-		this.runde++;
-		if (this.rightp == 4) {
-			System.out.println("Du hast gewonnen!");
-		} else if (this.runde == 8) {
-			System.out.println("Du hast verloren!");
-		}
-		raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
-		code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
-	}
-	else
-		System.out.println("Beide Spieler müssen ihre Farbfolge bestätigt haben!");
+			System.out.println("Richtige Farbe " + this.rightc);
+			System.out.println("Richtige Position und Farbe " + this.rightp);
+
+			this.rightc = 0;
+			this.rightp = 0;
+			this.runde++;
+
+			if (this.rightp == 4) {
+
+				System.out.println("Du hast gewonnen!");
+
+			} else if (this.runde == 8) {
+
+				System.out.println("Du hast verloren!");
+			}
+
+			raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
+			code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
+		} else
+			System.out.println("Beide Spieler müssen ihre Farbfolge bestätigt haben!");
 	}
 
 	// Methode legt ein neues Objekt Codierer an und blendet danach den Button
 	// aus
 	private void openCodeWindow() {
+
 		this.code = new Codierer();
 		codierer.setVisible(false);
 
@@ -204,12 +220,14 @@ public class Menue extends JFrame {
 	// Methode legt ein neues Objekt Ratende an und blendet danach den Button
 	// aus
 	private void openRatenWindow() {
+
 		this.raten = new Ratende();
 		ratende.setVisible(false);
 	}
 
 	// Übergibt den Button ihre Listener
 	private void registrierelistener() {
+
 		this.codierer.addMouseListener(this.openNewWindow);
 		this.ratende.addMouseListener(this.openNewWindow);
 		this.round.addMouseListener(this.closeRound);
@@ -218,6 +236,7 @@ public class Menue extends JFrame {
 
 	// Methode zum Ordnen der Komponenten
 	private void ordneKomponentenAn() {
+
 		this.getContentPane().setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
@@ -232,10 +251,6 @@ public class Menue extends JFrame {
 
 		c.gridy = 3;
 		this.getContentPane().add(round, c);
-	}
-
-	public static void main(String[] args) {
-		Menue m = new Menue();
 
 	}
 

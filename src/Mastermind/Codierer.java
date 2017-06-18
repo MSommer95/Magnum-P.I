@@ -13,7 +13,7 @@ public class Codierer extends JFrame {
 
 	private Color[] farbe;
 	private Color[] ccolor;
-	
+
 	private int bestätigt;
 	private int counter;
 
@@ -25,7 +25,7 @@ public class Codierer extends JFrame {
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
-	
+
 	private JButton[] buttonsammler;
 	private JButton eins;
 	private JButton zwei;
@@ -40,7 +40,7 @@ public class Codierer extends JFrame {
 	private MouseListener bestätigenListener;
 
 	// Getter und Setter
-	
+
 	public String[] getRundeAnzeigeText() {
 		return rundeAnzeigeText;
 	}
@@ -262,30 +262,42 @@ public class Codierer extends JFrame {
 	// Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht
 	// bekannt)
 	private void bestätigen() {
+
 		this.ccolor = new Color[] { this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(),
+
 				this.vier.getBackground() };
+
 		for (int i = 0; i < this.ccolor.length; i++) {
+
 			for (int j = 0; j < this.ccolor.length; j++) {
+
 				if (this.ccolor[i] == this.ccolor[j]) {
+
 					this.counter++;
 				}
 			}
 		}
+
 		if (counter > 4) {
+
 			System.out.println("Doppelte Farben sind nicht erlaubt. Bitte wähle eine andere Farbfolge.");
 		}
+
 		this.counter = 0;
 		this.bestätigt++;
+
 		System.out.println("Codierer hat seine Farbfolge bestätigt!");
 	}
 
 	private void farbe() {
+
 		int i = sliderFarbe.getValue() - 1;
 		buttonsammler[sliderButton.getValue() - 1].setBackground(farbe[i]);
 	}
 
 	// Übergibt den Komponenten die Listener
 	private void registrierelistener() {
+
 		this.sliderFarbe.addChangeListener(this.farbListener);
 		this.bestätigen.addMouseListener(this.bestätigenListener);
 	}
@@ -325,8 +337,10 @@ public class Codierer extends JFrame {
 		c.gridy = 1;
 		southP.add(sliderButton, c);
 
-		for (int i = 0; i < buttonsammler.length; i++)
+		for (int i = 0; i < buttonsammler.length; i++) {
+
 			centerP.add(buttonsammler[i]);
+		}
 
 		add(centerP, BorderLayout.CENTER);
 

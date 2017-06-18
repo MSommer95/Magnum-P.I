@@ -21,15 +21,15 @@ import javax.swing.event.ChangeListener;
 public class Ratende extends JFrame {
 	private Color[] farbe;
 	private Color[] rcolor;
-	
+
 	private int runde;
 	private int bestätigt;
-	
+
 	private String[] rundeAnzeigeText;
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
-	
+
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
@@ -140,7 +140,9 @@ public class Ratende extends JFrame {
 
 	// Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
+
 		this.runde = 0;
+
 		this.southP = new Panel();
 		this.southP.setBackground(new Color(250, 240, 230));
 
@@ -246,10 +248,13 @@ public class Ratende extends JFrame {
 	private void bestätigen() {
 
 		for (int i = 0; i < 4; i++) {
+
 			this.rcolor[i] = this.buttonsammler[i + (4 * this.runde)].getBackground();
 		}
+
 		this.runde++;
 		this.bestätigt++;
+
 		System.out.println("Der Ratende hat seine Farbfolge bestätigt!");
 	}
 
@@ -266,12 +271,14 @@ public class Ratende extends JFrame {
 	// Farbe/ für den Anwender ist die Farbe zu der Zahl im Vorfeld nicht
 	// bekannt)
 	private void farbe() {
+
 		int i = sliderFarbe.getValue() - 1;
 		buttonsammler[sliderButton.getValue() - 1 + 4 * this.runde].setBackground(farbe[i]);
 	}
 
 	// Übergibt den Komponenten die Listener
 	private void registrierelistener() {
+
 		this.sliderFarbe.addChangeListener(this.farbListener);
 		this.bestätigen.addMouseListener(this.bestätigenListener);
 	}
@@ -292,6 +299,7 @@ public class Ratende extends JFrame {
 		northP.add(rundeAnzeige);
 
 		add(southP, BorderLayout.SOUTH);
+
 		southP.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
@@ -320,35 +328,44 @@ public class Ratende extends JFrame {
 		GridBagConstraints d = new GridBagConstraints();
 		d.fill = GridBagConstraints.HORIZONTAL;
 		d.insets = new Insets(4, 4, 4, 4);
+
 		for (int i = 0; i <= buttonsammler.length; i++) {
+
 			if (i <= 3) {
 				d.gridy = 8;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 3 && i <= 7) {
 				d.gridy = 7;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 7 && i <= 11) {
 				d.gridy = 6;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 11 && i <= 15) {
 				d.gridy = 5;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 15 && i <= 19) {
 				d.gridy = 4;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 19 && i <= 23) {
 				d.gridy = 3;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 23 && i <= 27) {
 				d.gridy = 2;
 				centerP.add(buttonsammler[i], d);
 			}
+
 			if (i > 27 && i <= 31) {
 				d.gridy = 1;
 				centerP.add(buttonsammler[i], d);
