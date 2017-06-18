@@ -21,12 +21,15 @@ import javax.swing.event.ChangeListener;
 public class Ratende extends JFrame {
 	private Color[] farbe;
 	private Color[] rcolor;
+	
 	private int runde;
-
+	private int bestätigt;
+	
 	private String[] rundeAnzeigeText;
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
+	
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
@@ -75,9 +78,17 @@ public class Ratende extends JFrame {
 	private MouseListener bestätigenListener;
 
 	// getter setter
-	
+
 	public String[] getRundeAnzeigeText() {
 		return rundeAnzeigeText;
+	}
+
+	public int getBestätigt() {
+		return bestätigt;
+	}
+
+	public void setBestätigt(int bestätigt) {
+		this.bestätigt = bestätigt;
 	}
 
 	public void setRundeAnzeigeText(String[] rundeAnzeigeText) {
@@ -99,6 +110,7 @@ public class Ratende extends JFrame {
 	public void setRcolor(Color[] rcolor) {
 		this.rcolor = rcolor;
 	}
+
 	public JSlider getSliderFarbe() {
 		return sliderFarbe;
 	}
@@ -137,7 +149,6 @@ public class Ratende extends JFrame {
 
 		this.northP = new Panel();
 		this.northP.setBackground(new Color(150, 0, 190));
-		
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 		this.rcolor = new Color[4];
@@ -175,25 +186,24 @@ public class Ratende extends JFrame {
 		this.einunddreißig = new JButton("31");
 		this.zweiunddreißig = new JButton("32");
 		this.bestätigen = new JButton("Bestätigen");
-		
-		this.rundeAnzeigeText = new String[] {"Runde 1","Runde 2","Runde 3","Runde 4","Runde 5","Runde 6","Runde 7","Runde 8"};
+
+		this.rundeAnzeigeText = new String[] { "Runde 1", "Runde 2", "Runde 3", "Runde 4", "Runde 5", "Runde 6",
+				"Runde 7", "Runde 8" };
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
 				dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
 				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, fünfundzwanzig, sechsundzwanzig, siebenundzwanzig,
 				achtundzwanzig, neunundzwanzig, dreißig, einunddreißig, zweiunddreißig };
-		
+
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-		
+
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
 
 		this.sliderFarbe = this.erstelleSchieberegler(1, 6);
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
-		
-		
-		
+
 	}
 
 	// Innere Klasse für die Slider Listener
@@ -234,11 +244,13 @@ public class Ratende extends JFrame {
 
 	// Methode zum Einlesen der Farben
 	private void bestätigen() {
-		
+
 		for (int i = 0; i < 4; i++) {
 			this.rcolor[i] = this.buttonsammler[i + (4 * this.runde)].getBackground();
 		}
 		this.runde++;
+		this.bestätigt++;
+		System.out.println("Der Ratende hat seine Farbfolge bestätigt!");
 	}
 
 	// Listener f[r die Slider
@@ -284,27 +296,27 @@ public class Ratende extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(4, 4, 4, 4);
-		
+
 		southP.add(labelSliderFarbe, c);
-		
+
 		c.gridy = 1;
-		southP.add(sliderFarbe,c);
-		
+		southP.add(sliderFarbe, c);
+
 		c.gridy = 0;
 		c.gridx = 2;
-		southP.add(bestätigen,c);
-		
+		southP.add(bestätigen, c);
+
 		c.gridx = 3;
 		southP.add(labelSliderButton, c);
 		c.gridy = 1;
-		southP.add(sliderButton,c);
-		
+		southP.add(sliderButton, c);
+
 		c.gridx = 1;
-		c.gridy= 0;
+		c.gridy = 0;
 		add(centerP, BorderLayout.CENTER);
-		
+
 		centerP.setLayout(new GridBagLayout());
-		
+
 		GridBagConstraints d = new GridBagConstraints();
 		d.fill = GridBagConstraints.HORIZONTAL;
 		d.insets = new Insets(4, 4, 4, 4);

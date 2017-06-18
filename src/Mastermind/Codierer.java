@@ -10,20 +10,22 @@ import javax.swing.event.*;
 //Der Codierer entscheidet sich für eine Farbfolge
 
 public class Codierer extends JFrame {
-	
+
 	private Color[] farbe;
 	private Color[] ccolor;
-
-	private int counter;
 	
+	private int bestätigt;
+	private int counter;
+
 	private String[] rundeAnzeigeText;
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
-	
+
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
+	
 	private JButton[] buttonsammler;
 	private JButton eins;
 	private JButton zwei;
@@ -33,13 +35,22 @@ public class Codierer extends JFrame {
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
-	
+
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
 
 	// Getter und Setter
+	
 	public String[] getRundeAnzeigeText() {
 		return rundeAnzeigeText;
+	}
+
+	public int getBestätigt() {
+		return bestätigt;
+	}
+
+	public void setBestätigt(int bestätigt) {
+		this.bestätigt = bestätigt;
 	}
 
 	public void setRundeAnzeigeText(String[] rundeAnzeigeText) {
@@ -53,6 +64,7 @@ public class Codierer extends JFrame {
 	public void setRundeAnzeige(JLabel rundeAnzeige) {
 		this.rundeAnzeige = rundeAnzeige;
 	}
+
 	public Color[] getFarbe() {
 		return farbe;
 	}
@@ -194,11 +206,12 @@ public class Codierer extends JFrame {
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier };
-		
+
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-		
-		this.rundeAnzeigeText = new String[] {"Runde 1","Runde 2","Runde 3","Runde 4","Runde 5","Runde 6","Runde 7","Runde 8"};
+
+		this.rundeAnzeigeText = new String[] { "Runde 1", "Runde 2", "Runde 3", "Runde 4", "Runde 5", "Runde 6",
+				"Runde 7", "Runde 8" };
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.counter = 0;
 	}
@@ -251,18 +264,19 @@ public class Codierer extends JFrame {
 	private void bestätigen() {
 		this.ccolor = new Color[] { this.eins.getBackground(), this.zwei.getBackground(), this.drei.getBackground(),
 				this.vier.getBackground() };
-		for(int i = 0; i<this.ccolor.length;i++){
-			for(int j = 0; j<this.ccolor.length;j++){
-				if(this.ccolor[i]==this.ccolor[j]){
+		for (int i = 0; i < this.ccolor.length; i++) {
+			for (int j = 0; j < this.ccolor.length; j++) {
+				if (this.ccolor[i] == this.ccolor[j]) {
 					this.counter++;
 				}
 			}
 		}
-		System.out.println(this.counter);
-		if(counter>4){
+		if (counter > 4) {
 			System.out.println("Doppelte Farben sind nicht erlaubt. Bitte wähle eine andere Farbfolge.");
 		}
 		this.counter = 0;
+		this.bestätigt++;
+		System.out.println("Codierer hat seine Farbfolge bestätigt!");
 	}
 
 	private void farbe() {
@@ -296,21 +310,20 @@ public class Codierer extends JFrame {
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(4, 4, 4, 4);
-		
+
 		southP.add(labelSliderFarbe, c);
-		
+
 		c.gridy = 1;
-		southP.add(sliderFarbe,c);
-		
+		southP.add(sliderFarbe, c);
+
 		c.gridy = 0;
 		c.gridx = 2;
-		southP.add(bestätigen,c);
-		
+		southP.add(bestätigen, c);
+
 		c.gridx = 3;
 		southP.add(labelSliderButton, c);
 		c.gridy = 1;
-		southP.add(sliderButton,c);
-		
+		southP.add(sliderButton, c);
 
 		for (int i = 0; i < buttonsammler.length; i++)
 			centerP.add(buttonsammler[i]);

@@ -81,7 +81,7 @@ public class Menue extends JFrame {
 		this.runde = 0;
 		this.codierer = new JButton("Codierer");
 		this.ratende = new JButton("Ratende");
-		this.round = new JButton("Round");
+		this.round = new JButton("Runde Beenden");
 
 		this.openNewWindow = new OpenWindowListener();
 		this.closeRound = new CloseRoundListener();
@@ -162,7 +162,7 @@ public class Menue extends JFrame {
 
 	// Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
 	private void round() {
-
+	if(code.getBestätigt()>0&&raten.getBestätigt()>0){
 		for (int i = 0; i < code.getCcolor().length; i++) {
 			if (code.getCcolor()[i] == raten.getRcolor()[i]) {
 				this.rightp++;
@@ -172,7 +172,7 @@ public class Menue extends JFrame {
 			for (int j = 0; j < raten.getRcolor().length; j++) {
 				if (code.getCcolor()[i] == raten.getRcolor()[j]) {
 					this.rightc++;
-					}
+				}
 			}
 		}
 
@@ -181,10 +181,16 @@ public class Menue extends JFrame {
 		this.rightc = 0;
 		this.rightp = 0;
 		this.runde++;
+		if (this.rightp == 4) {
+			System.out.println("Du hast gewonnen!");
+		} else if (this.runde == 8) {
+			System.out.println("Du hast verloren!");
+		}
 		raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
 		code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
-
-		System.out.println(this.runde);
+	}
+	else
+		System.out.println("Beide Spieler müssen ihre Farbfolge bestätigt haben!");
 	}
 
 	// Methode legt ein neues Objekt Codierer an und blendet danach den Button
@@ -230,7 +236,7 @@ public class Menue extends JFrame {
 
 	public static void main(String[] args) {
 		Menue m = new Menue();
-		
+
 	}
 
 }
