@@ -181,6 +181,8 @@ public class Menue extends JFrame {
 		this.rightc = 0;
 		this.rightp = 0;
 		this.runde++;
+		raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
+		code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
 
 		System.out.println(this.runde);
 	}

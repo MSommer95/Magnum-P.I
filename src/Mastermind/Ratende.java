@@ -23,19 +23,14 @@ public class Ratende extends JFrame {
 	private Color[] rcolor;
 	private int runde;
 
-	public Color[] getRcolor() {
-		return rcolor;
-	}
-
-	public void setRcolor(Color[] rcolor) {
-		this.rcolor = rcolor;
-	}
-	
+	private String[] rundeAnzeigeText;
+	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
+
 	private JButton[] buttonsammler;
 
 	private JButton eins;
@@ -80,6 +75,30 @@ public class Ratende extends JFrame {
 	private MouseListener bestätigenListener;
 
 	// getter setter
+	
+	public String[] getRundeAnzeigeText() {
+		return rundeAnzeigeText;
+	}
+
+	public void setRundeAnzeigeText(String[] rundeAnzeigeText) {
+		this.rundeAnzeigeText = rundeAnzeigeText;
+	}
+
+	public JLabel getRundeAnzeige() {
+		return rundeAnzeige;
+	}
+
+	public void setRundeAnzeige(JLabel rundeAnzeige) {
+		this.rundeAnzeige = rundeAnzeige;
+	}
+
+	public Color[] getRcolor() {
+		return rcolor;
+	}
+
+	public void setRcolor(Color[] rcolor) {
+		this.rcolor = rcolor;
+	}
 	public JSlider getSliderFarbe() {
 		return sliderFarbe;
 	}
@@ -118,6 +137,7 @@ public class Ratende extends JFrame {
 
 		this.northP = new Panel();
 		this.northP.setBackground(new Color(150, 0, 190));
+		
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 		this.rcolor = new Color[4];
@@ -156,19 +176,24 @@ public class Ratende extends JFrame {
 		this.zweiunddreißig = new JButton("32");
 		this.bestätigen = new JButton("Bestätigen");
 		
+		this.rundeAnzeigeText = new String[] {"Runde 1","Runde 2","Runde 3","Runde 4","Runde 5","Runde 6","Runde 7","Runde 8"};
+		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
+				dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
+				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, fünfundzwanzig, sechsundzwanzig, siebenundzwanzig,
+				achtundzwanzig, neunundzwanzig, dreißig, einunddreißig, zweiunddreißig };
+		
+		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
-		this.labelSliderFarbe = new JLabel("Button-Farbe");
+		this.labelSliderFarbe = new JLabel("Farbe-Slider");
 		
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
 
 		this.sliderFarbe = this.erstelleSchieberegler(1, 6);
 		this.sliderButton = this.erstelleSchieberegler(1, 4);
-
-		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
-				dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
-				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, fünfundzwanzig, sechsundzwanzig, siebenundzwanzig,
-				achtundzwanzig, neunundzwanzig, dreißig, einunddreißig, zweiunddreißig };
+		
+		
+		
 	}
 
 	// Innere Klasse für die Slider Listener
@@ -251,7 +276,8 @@ public class Ratende extends JFrame {
 	// Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
 
-		
+		add(northP, BorderLayout.NORTH);
+		northP.add(rundeAnzeige);
 
 		add(southP, BorderLayout.SOUTH);
 		southP.setLayout(new GridBagLayout());
@@ -273,7 +299,6 @@ public class Ratende extends JFrame {
 		c.gridy = 1;
 		southP.add(sliderButton,c);
 		
-		add(northP, BorderLayout.NORTH);
 		c.gridx = 1;
 		c.gridy= 0;
 		add(centerP, BorderLayout.CENTER);

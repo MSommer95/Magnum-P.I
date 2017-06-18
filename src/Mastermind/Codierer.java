@@ -10,11 +10,16 @@ import javax.swing.event.*;
 //Der Codierer entscheidet sich für eine Farbfolge
 
 public class Codierer extends JFrame {
-
+	
 	private Color[] farbe;
 	private Color[] ccolor;
 
 	private int counter;
+	
+	private String[] rundeAnzeigeText;
+	private JLabel rundeAnzeige;
+	private JLabel labelSliderButton;
+	private JLabel labelSliderFarbe;
 	
 	private Panel southP;
 	private Panel centerP;
@@ -28,11 +33,26 @@ public class Codierer extends JFrame {
 
 	private JSlider sliderFarbe;
 	private JSlider sliderButton;
-
+	
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
 
 	// Getter und Setter
+	public String[] getRundeAnzeigeText() {
+		return rundeAnzeigeText;
+	}
+
+	public void setRundeAnzeigeText(String[] rundeAnzeigeText) {
+		this.rundeAnzeigeText = rundeAnzeigeText;
+	}
+
+	public JLabel getRundeAnzeige() {
+		return rundeAnzeige;
+	}
+
+	public void setRundeAnzeige(JLabel rundeAnzeige) {
+		this.rundeAnzeige = rundeAnzeige;
+	}
 	public Color[] getFarbe() {
 		return farbe;
 	}
@@ -175,6 +195,11 @@ public class Codierer extends JFrame {
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier };
 		
+		this.labelSliderButton = new JLabel("Button-Slider");
+		this.labelSliderFarbe = new JLabel("Farbe-Slider");
+		
+		this.rundeAnzeigeText = new String[] {"Runde 1","Runde 2","Runde 3","Runde 4","Runde 5","Runde 6","Runde 7","Runde 8"};
+		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.counter = 0;
 	}
 
@@ -263,12 +288,29 @@ public class Codierer extends JFrame {
 	// Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
 
-		southP.add(sliderFarbe);
-		southP.add(bestätigen);
-		southP.add(sliderButton);
+		add(northP, BorderLayout.NORTH);
+		northP.add(rundeAnzeige);
 
 		add(southP, BorderLayout.SOUTH);
-		add(northP, BorderLayout.NORTH);
+		southP.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(4, 4, 4, 4);
+		
+		southP.add(labelSliderFarbe, c);
+		
+		c.gridy = 1;
+		southP.add(sliderFarbe,c);
+		
+		c.gridy = 0;
+		c.gridx = 2;
+		southP.add(bestätigen,c);
+		
+		c.gridx = 3;
+		southP.add(labelSliderButton, c);
+		c.gridy = 1;
+		southP.add(sliderButton,c);
+		
 
 		for (int i = 0; i < buttonsammler.length; i++)
 			centerP.add(buttonsammler[i]);
