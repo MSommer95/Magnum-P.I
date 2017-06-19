@@ -189,7 +189,7 @@ public class Codierer extends JFrame {
 		this.centerP.setBackground(new Color(50, 0, 150));
 
 		this.northP = new Panel();
-		this.northP.setBackground(new Color(150, 0, 190));
+		this.northP.setBackground(new Color(200, 0, 190));
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 
