@@ -131,7 +131,7 @@ public class Ratende extends JFrame {
 	public Ratende() {
 		super("Ratende Screen");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(612, 512);
+		this.setSize(612, 612);
 		this.initialisiereKomponenten();
 		this.ordneKomponentenAn();
 		this.registrierelistener();
@@ -147,7 +147,7 @@ public class Ratende extends JFrame {
 		this.southP.setBackground(new Color(250, 240, 230));
 
 		this.centerP = new Panel();
-		this.centerP.setBackground(new Color(150, 0, 150));
+		this.centerP.setBackground(new Color(50, 0, 150));
 
 		this.northP = new Panel();
 		this.northP.setBackground(new Color(150, 0, 190));

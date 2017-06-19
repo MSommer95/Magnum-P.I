@@ -173,7 +173,7 @@ public class Codierer extends JFrame {
 	public Codierer() {
 		super("Codierer Screen");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(612, 512);
+		this.setSize(612, 612);
 		this.initialisiereKomponenten();
 		this.ordneKomponentenAn();
 		this.registrierelistener();
@@ -186,17 +186,17 @@ public class Codierer extends JFrame {
 		this.southP.setBackground(new Color(250, 240, 230));
 
 		this.centerP = new Panel();
-		this.centerP.setBackground(new Color(150, 0, 150));
+		this.centerP.setBackground(new Color(50, 0, 150));
 
 		this.northP = new Panel();
 		this.northP.setBackground(new Color(150, 0, 190));
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 
-		this.eins = new JButton("eins");
-		this.zwei = new JButton("zwei");
-		this.drei = new JButton("drei");
-		this.vier = new JButton("vier");
+		this.eins = new JButton("Eins");
+		this.zwei = new JButton("Zwei");
+		this.drei = new JButton("Drei");
+		this.vier = new JButton("Vier");
 		this.bestätigen = new JButton("Bestätigen");
 
 		this.farbListener = new FarbListener();
