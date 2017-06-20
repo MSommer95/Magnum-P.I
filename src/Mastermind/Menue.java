@@ -71,7 +71,7 @@ public class Menue extends JFrame {
 	public Menue() {
 		super("Menü");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(512, 512);
+		this.setSize(612, 612);
 		this.initialisiereKomponenten();
 		this.registrierelistener();
 		this.ordneKomponentenAn();
@@ -189,8 +189,6 @@ public class Menue extends JFrame {
 			System.out.println("Richtige Farbe " + this.rightc);
 			System.out.println("Richtige Position und Farbe " + this.rightp);
 
-			this.rightc = 0;
-			this.rightp = 0;
 			this.runde++;
 
 			if (this.rightp == 4) {
@@ -201,9 +199,14 @@ public class Menue extends JFrame {
 
 				System.out.println("Du hast verloren!");
 			}
-
+			
 			raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
+			raten.getTips1().setText("Richtige Farbe: " + this.rightc);
+			raten.getTips2().setText("Richtige Farbe und Position: " + this.rightp);
 			code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
+			this.rightc = 0;
+			this.rightp = 0;
+			
 		} else
 			System.out.println("Beide Spieler müssen ihre Farbfolge bestätigt haben!");
 	}

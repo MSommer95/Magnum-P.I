@@ -29,11 +29,14 @@ public class Ratende extends JFrame {
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
+	private JLabel tips1;
+	private JLabel tips2;
 
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
-
+	private Panel westP;
+	
 	private JButton[] buttonsammler;
 
 	private JButton eins;
@@ -78,7 +81,20 @@ public class Ratende extends JFrame {
 	private MouseListener bestätigenListener;
 
 	// getter setter
+	public JLabel getTips1() {
+		return tips1;
+	}
 
+	public void setTips1(JLabel tips) {
+		this.tips1 = tips;
+	}
+	public JLabel getTips2() {
+		return tips2;
+	}
+
+	public void setTips2(JLabel tips) {
+		this.tips2 = tips;
+	}
 	public String[] getRundeAnzeigeText() {
 		return rundeAnzeigeText;
 	}
@@ -147,11 +163,14 @@ public class Ratende extends JFrame {
 		this.southP.setBackground(new Color(250, 240, 230));
 
 		this.centerP = new Panel();
-		this.centerP.setBackground(new Color(50, 0, 150));
+		this.centerP.setBackground(new Color(250, 240, 230));
 
 		this.northP = new Panel();
-		this.northP.setBackground(new Color(200, 0, 190));
-
+		this.northP.setBackground(new Color(250, 240, 230));
+		
+		this.westP = new Panel();
+		this.westP.setBackground(new Color(250, 240, 230));
+		
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 		this.rcolor = new Color[4];
 
@@ -199,7 +218,9 @@ public class Ratende extends JFrame {
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-
+		this.tips1 = new JLabel("Tipps:");
+		this.tips2 = new JLabel("Tipps:");
+		
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
 
@@ -294,7 +315,9 @@ public class Ratende extends JFrame {
 
 	// Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
-
+		
+		
+		
 		add(northP, BorderLayout.NORTH);
 		northP.add(rundeAnzeige);
 
@@ -322,7 +345,7 @@ public class Ratende extends JFrame {
 		c.gridx = 1;
 		c.gridy = 0;
 		add(centerP, BorderLayout.CENTER);
-
+		
 		centerP.setLayout(new GridBagLayout());
 
 		GridBagConstraints d = new GridBagConstraints();
@@ -370,6 +393,18 @@ public class Ratende extends JFrame {
 				d.gridy = 1;
 				centerP.add(buttonsammler[i], d);
 			}
+			
+			
+			add(westP, BorderLayout.WEST);
+			westP.setLayout(new GridBagLayout());
+
+			GridBagConstraints f = new GridBagConstraints();
+			f.fill = GridBagConstraints.HORIZONTAL;
+			f.insets = new Insets(4, 4, 4, 4);
+			
+			westP.add(tips1,f);
+			f.gridy = 1;
+			westP.add(tips2,f);
 		}
 	}
 

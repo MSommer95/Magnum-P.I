@@ -186,17 +186,17 @@ public class Codierer extends JFrame {
 		this.southP.setBackground(new Color(250, 240, 230));
 
 		this.centerP = new Panel();
-		this.centerP.setBackground(new Color(50, 0, 150));
+		this.centerP.setBackground(new Color(250, 240, 230));
 
 		this.northP = new Panel();
-		this.northP.setBackground(new Color(200, 0, 190));
+		this.northP.setBackground(new Color(250, 240, 230));
 
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 
-		this.eins = new JButton("Eins");
-		this.zwei = new JButton("Zwei");
-		this.drei = new JButton("Drei");
-		this.vier = new JButton("Vier");
+		this.eins = new JButton("1");
+		this.zwei = new JButton("2");
+		this.drei = new JButton("3");
+		this.vier = new JButton("4");
 		this.bestätigen = new JButton("Bestätigen");
 
 		this.farbListener = new FarbListener();
