@@ -31,6 +31,15 @@ public class Ratende extends JFrame {
 	private JLabel labelSliderFarbe;
 	private JLabel tips1;
 	private JLabel tips2;
+	private JLabel hilfe1;
+	private JLabel hilfe2;
+	private JLabel hilfe3;
+	private JLabel hilfe4;
+	private JLabel hilfe5;
+	private JLabel hilfe6;
+	private JLabel hilfe7;
+	private JLabel hilfe8;
+	private JLabel leerraum;
 
 	private Panel southP;
 	private Panel centerP;
@@ -237,6 +246,15 @@ public class Ratende extends JFrame {
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
 		this.tips1 = new JLabel("Richtige Farbe");
 		this.tips2 = new JLabel("Richtige Position & Farbe");
+		this.hilfe1 = new JLabel("Runde 1:");
+		this.hilfe2 = new JLabel("Runde 2:");
+		this.hilfe3 = new JLabel("Runde 3:");
+		this.hilfe4 = new JLabel("Runde 4:");
+		this.hilfe5 = new JLabel("Runde 5:");
+		this.hilfe6 = new JLabel("Runde 6:");
+		this.hilfe7 = new JLabel("Runde 7:");
+		this.hilfe8 = new JLabel("Runde 8:");
+		this.leerraum = new JLabel(" ");
 		
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
@@ -422,15 +440,63 @@ public class Ratende extends JFrame {
 			add(westP, BorderLayout.WEST);
 			westP.setLayout(new GridBagLayout());
 			
+		
 			
 
+			
+			
+
+
+			
 			GridBagConstraints f = new GridBagConstraints();
 			f.fill = GridBagConstraints.HORIZONTAL;
-			f.insets = new Insets(4, 4, 4, 4);
+			f.insets = new Insets(1, 1, 1, 1);
 			
-			westP.add(tips1,f);
 			f.gridy = 1;
+			f.gridx = 0;
+			f.ipady = 17;
+			westP.add(tips1,f);
+			
+			f.gridy = 1;
+			f.gridx = 2;
 			westP.add(tips2,f);
+			
+			f.gridy = 2;
+			f.gridx = 0;
+			westP.add(hilfe8,f);
+			
+			f.gridy = 3;
+			f.gridx = 0;
+			westP.add(hilfe7,f);
+			
+			f.gridy = 4;
+			f.gridx = 0;
+			westP.add(hilfe6,f);
+			
+			f.gridy = 5;
+			f.gridx = 0;
+			westP.add(hilfe5,f);
+			
+			f.gridy = 6;
+			f.gridx = 0;
+			westP.add(hilfe4,f);
+			
+			f.gridy = 7;
+			f.gridx = 0;
+			westP.add(hilfe3,f);
+			
+			f.gridy = 8;
+			f.gridx = 0;
+			westP.add(hilfe2,f);
+			
+			f.gridy = 9;
+			f.gridx = 0;
+			westP.add(hilfe1,f);	
+			
+			f.gridy = 10;
+			f.gridx = 9;
+			f.ipady = 20;
+			westP.add(leerraum, f);
 		}
 	}
 
