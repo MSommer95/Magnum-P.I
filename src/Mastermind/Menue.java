@@ -203,7 +203,6 @@ public class Menue extends JFrame {
 				
 			}
 			
-			
 			raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
 			raten.getTips1().setText("Richtige Farbe: " + this.rightc);
 			raten.getTips2().setText("Richtige Farbe & Position: " + this.rightp);
