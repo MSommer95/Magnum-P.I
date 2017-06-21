@@ -11,7 +11,9 @@ import javax.swing.event.*;
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
 
 public class Menue extends JFrame {
-
+	
+	private String[] zeichen;
+	
 	private int rightp;
 	private int rightc;
 	private int runde;
@@ -80,7 +82,8 @@ public class Menue extends JFrame {
 	// Initialisiert die Komponenten von Menue
 
 	private void initialisiereKomponenten() {
-
+		
+		this.zeichen = new String[] {" | "," X "};
 		this.rightp = 0;
 		this.rightc = 0;
 		this.runde = 0;
@@ -174,8 +177,10 @@ public class Menue extends JFrame {
 			for (int i = 0; i < code.getCcolor().length; i++) {
 
 				if (code.getCcolor()[i] == raten.getRcolor()[i]) {
+					
 					this.rightp++;
 					this.rightc--;
+					
 				}
 
 				for (int j = 0; j < raten.getRcolor().length; j++) {
@@ -189,7 +194,18 @@ public class Menue extends JFrame {
 
 			System.out.println("Richtige Farbe " + this.rightc);
 			System.out.println("Richtige Position und Farbe " + this.rightp);
-
+			
+			if(this.rightp > 0){
+			for(int y=0;y<=this.rightp-1;y++){
+				raten.getJlabelArray()[this.runde].setText(raten.getJlabelArray()[this.runde].getText()+ zeichen[1]);;
+			}
+			}
+			if(this.rightc>0){
+			for(int y=0;y<=this.rightc-1;y++){
+				raten.getJlabelArray()[this.runde].setText(raten.getJlabelArray()[this.runde].getText()+ zeichen[0]);;
+			}
+			}
+			
 			this.runde++;
 
 			if (this.rightp == 4) {
@@ -204,8 +220,8 @@ public class Menue extends JFrame {
 			}
 			
 			raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
-			raten.getTips1().setText("Richtige Farbe: " + this.rightc);
-			raten.getTips2().setText("Richtige Farbe & Position: " + this.rightp);
+//			raten.getTips1().setText("" +this.rightc);
+//			raten.getTips2().setText("" +this.rightp);
 			code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
 			this.rightc = 0;
 			this.rightp = 0;
