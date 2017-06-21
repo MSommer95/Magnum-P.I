@@ -41,11 +41,14 @@ public class Ratende extends JFrame {
 	private JLabel hilfe8;
 	private JLabel leerraum;
 
+	private JLabel legende;
+
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
 	private Panel westP;
 	
+	private JLabel[] jlabelArray;
 	private JButton[] buttonsammler;
 
 	private JButton eins;
@@ -148,6 +151,14 @@ public class Ratende extends JFrame {
 		this.rcolor = rcolor;
 	}
 
+	public JLabel[] getJlabelArray() {
+		return jlabelArray;
+	}
+
+	public void setJlabelArray(JLabel[] jlabelArray) {
+		this.jlabelArray = jlabelArray;
+	}
+
 	public JSlider getSliderFarbe() {
 		return sliderFarbe;
 	}
@@ -244,17 +255,19 @@ public class Ratende extends JFrame {
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-		this.tips1 = new JLabel("Richtige Farbe:");
-		this.tips2 = new JLabel("      Richtige Position & Farbe:");
-		this.hilfe1 = new JLabel("Runde 1:");
-		this.hilfe2 = new JLabel("Runde 2:");
-		this.hilfe3 = new JLabel("Runde 3:");
-		this.hilfe4 = new JLabel("Runde 4:");
-		this.hilfe5 = new JLabel("Runde 5:");
-		this.hilfe6 = new JLabel("Runde 6:");
-		this.hilfe7 = new JLabel("Runde 7:");
-		this.hilfe8 = new JLabel("Runde 8:");
+		this.hilfe1 = new JLabel("Runde 1: ");
+		this.hilfe2 = new JLabel("Runde 2: ");
+		this.hilfe3 = new JLabel("Runde 3: ");
+		this.hilfe4 = new JLabel("Runde 4: ");
+		this.hilfe5 = new JLabel("Runde 5: ");
+		this.hilfe6 = new JLabel("Runde 6: ");
+		this.hilfe7 = new JLabel("Runde 7: ");
+		this.hilfe8 = new JLabel("Runde 8: ");
 		this.leerraum = new JLabel(" ");
+		
+		this.jlabelArray = new JLabel[] {hilfe1,hilfe2,hilfe3,hilfe4,hilfe5,hilfe6,hilfe7,hilfe8};
+
+		this.legende = new JLabel("Richtige Farbe:  |     Richtige Poition & Farbe:  X");
 		
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
@@ -442,11 +455,6 @@ public class Ratende extends JFrame {
 			
 		
 			
-
-			
-			
-
-
 			
 			GridBagConstraints f = new GridBagConstraints();
 			f.fill = GridBagConstraints.HORIZONTAL;
@@ -455,11 +463,7 @@ public class Ratende extends JFrame {
 			f.gridy = 1;
 			f.gridx = 2;
 			f.ipady = 17;
-			westP.add(tips1,f);
-			
-			f.gridy = 1;
-			f.gridx = 5;
-			westP.add(tips2,f);
+			westP.add(legende,f);
 			
 			f.gridy = 2;
 			f.gridx = 0;
@@ -499,5 +503,4 @@ public class Ratende extends JFrame {
 			westP.add(leerraum, f);
 		}
 	}
-
 }
