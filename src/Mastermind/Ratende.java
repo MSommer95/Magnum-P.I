@@ -244,8 +244,8 @@ public class Ratende extends JFrame {
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-		this.tips1 = new JLabel("Richtige Farbe");
-		this.tips2 = new JLabel("Richtige Position & Farbe");
+		this.tips1 = new JLabel("Richtige Farbe:");
+		this.tips2 = new JLabel("      Richtige Position & Farbe:");
 		this.hilfe1 = new JLabel("Runde 1:");
 		this.hilfe2 = new JLabel("Runde 2:");
 		this.hilfe3 = new JLabel("Runde 3:");
@@ -453,12 +453,12 @@ public class Ratende extends JFrame {
 			f.insets = new Insets(1, 1, 1, 1);
 			
 			f.gridy = 1;
-			f.gridx = 0;
+			f.gridx = 2;
 			f.ipady = 17;
 			westP.add(tips1,f);
 			
 			f.gridy = 1;
-			f.gridx = 2;
+			f.gridx = 5;
 			westP.add(tips2,f);
 			
 			f.gridy = 2;
