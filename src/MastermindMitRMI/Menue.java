@@ -1,7 +1,8 @@
-package Mastermind;
+package MastermindMitRMI;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.rmi.RemoteException;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -10,20 +11,16 @@ import javax.swing.event.*;
 
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
 
-public class Menue extends JFrame {
-	
-	private String[] zeichen;
-	
+public class Menue extends JFrame implements SpielInterface{
+	private int[] farbenRaten;
 	private int rightp;
 	private int rightc;
 	private int runde;
 
 	private JButton codierer;
-	private JButton ratende;
 	private JButton round;
 
 	private Codierer code;
-	private Ratende raten;
 
 	private MouseListener openNewWindow;
 	private MouseListener closeRound;
@@ -37,13 +34,7 @@ public class Menue extends JFrame {
 		this.codierer = codierer;
 	}
 
-	public JButton getRatende() {
-		return ratende;
-	}
 
-	public void setRatende(JButton ratende) {
-		this.ratende = ratende;
-	}
 
 	public Codierer getCode() {
 		return code;
@@ -51,14 +42,6 @@ public class Menue extends JFrame {
 
 	public void setCode(Codierer code) {
 		this.code = code;
-	}
-
-	public Ratende getRaten() {
-		return raten;
-	}
-
-	public void setRaten(Ratende raten) {
-		this.raten = raten;
 	}
 
 	public MouseListener getOpenNewWindow() {
@@ -82,14 +65,13 @@ public class Menue extends JFrame {
 	// Initialisiert die Komponenten von Menue
 
 	private void initialisiereKomponenten() {
+		this.farbenRaten = new int[4];
 		
-		this.zeichen = new String[] {" | "," X "};
 		this.rightp = 0;
 		this.rightc = 0;
 		this.runde = 0;
 
 		this.codierer = new JButton("Codierer");
-		this.ratende = new JButton("Ratende");
 		this.round = new JButton("Runde Beenden");
 
 		this.openNewWindow = new OpenWindowListener();
@@ -103,9 +85,7 @@ public class Menue extends JFrame {
 			if (e.getSource() == codierer) {
 				openCodeWindow();
 
-			} else if (e.getSource() == ratende) {
-				openRatenWindow();
-			}
+			} 
 
 		}
 
@@ -171,77 +151,9 @@ public class Menue extends JFrame {
 
 	// Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
 	private void round() {
-		controllFarbe();
-		if (code.getBestätigt() > 0 && raten.getBestätigt() > 0) {
-
-			for (int i = 0; i < code.getCcolor().length; i++) {
-
-				if (code.getCcolor()[i] == raten.getRcolor()[i]) {
-					
-					this.rightp++;
-					this.rightc--;
-					
-				}
-
-				for (int j = 0; j < raten.getRcolor().length; j++) {
-
-					if (code.getCcolor()[i] == raten.getRcolor()[j]) {
-
-						this.rightc++;
-					}
-				}
-			}
-
-			System.out.println("Richtige Farbe " + this.rightc);
-			System.out.println("Richtige Position und Farbe " + this.rightp);
-			
-			if(this.rightp > 0){
-			for(int y=0;y<=this.rightp-1;y++){
-				raten.getJlabelArray()[this.runde].setText(raten.getJlabelArray()[this.runde].getText()+ zeichen[1]);;
-			}
-			}
-			if(this.rightc>0){
-			for(int y=0;y<=this.rightc-1;y++){
-				raten.getJlabelArray()[this.runde].setText(raten.getJlabelArray()[this.runde].getText()+ zeichen[0]);;
-			}
-			}
-			
-			this.runde++;
-
-			if (this.rightp == 4) {
-				sichtbar();
-				System.out.println("Du hast gewonnen!");
-
-			} else if (this.runde == 8) {
-				sichtbar();
-				System.out.println("Du hast verloren!");
-				
-				
-			}
-			if(this.runde<8){
-			raten.getRundeAnzeige().setText(raten.getRundeAnzeigeText()[this.runde]);
-			code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
-			}
-			this.rightc = 0;
-			this.rightp = 0;
-			
-		} else
-			System.out.println("Beide Spieler müssen ihre Farbfolge bestätigt haben!");
+		vergleich();
 	}
 
-	public void sichtbar(){
-		for(int i = 0; i<=code.getCcolor().length-1;i++){
-			raten.getButtonsammler()[i+32].setVisible(true);
-		}
-	}
-	public void controllFarbe(){
-		for(int i = 0; i<=code.getCcolor().length-1;i++){
-		raten.getButtonsammler()[i+32].setBackground(code.getCcolor()[i]);
-		
-		
-		}
-	}
-	
 	// Methode legt ein neues Objekt Codierer an und blendet danach den Button
 	// aus
 	private void openCodeWindow() {
@@ -253,17 +165,12 @@ public class Menue extends JFrame {
 
 	// Methode legt ein neues Objekt Ratende an und blendet danach den Button
 	// aus
-	private void openRatenWindow() {
-
-		this.raten = new Ratende();
-		ratende.setVisible(false);
-	}
 
 	// Übergibt den Button ihre Listener
 	private void registrierelistener() {
 
 		this.codierer.addMouseListener(this.openNewWindow);
-		this.ratende.addMouseListener(this.openNewWindow);
+		
 		this.round.addMouseListener(this.closeRound);
 
 	}
@@ -281,11 +188,64 @@ public class Menue extends JFrame {
 		this.getContentPane().add(codierer, c);
 
 		c.gridy = 2;
-		this.getContentPane().add(ratende, c);
-
-		c.gridy = 3;
 		this.getContentPane().add(round, c);
 
+	}
+
+	
+	
+	@Override
+	public boolean starteSpiel(int starter) throws RemoteException {
+		this.runde = starter;
+		 return true;
+	}
+
+	@Override
+	public boolean spielzug(int f1, int f2, int f3, int f4, int runde) throws RemoteException {
+		
+			this.farbenRaten[0] = f1;
+			this.farbenRaten[1] = f2;
+			this.farbenRaten[2] = f3;
+			this.farbenRaten[3] = f4;
+			this.runde = runde;
+
+			code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
+		return true;
+	}
+	
+	public void vergleich(){
+		
+		for (int i = 0; i < code.getCcolor().length; i++) {
+			if (code.getCcolor()[i].getRGB() == this.farbenRaten[i]) {
+				this.rightp++;
+				this.rightc--;
+			}
+
+			for (int j = 0; j < this.farbenRaten.length; j++) {
+
+				if (code.getCcolor()[i].getRGB() == this.farbenRaten[j]) {
+
+					this.rightc++;
+				}
+			}
+		}
+		
+		System.out.println("Richtige Farbe " + this.rightc);
+		System.out.println("Richtige Position und Farbe " + this.rightp);
+
+
+		this.runde++;
+
+		if (this.rightp == 4) {
+
+			System.out.println("Du hast gewonnen!");
+
+		} else if (this.runde == 8) {
+
+			System.out.println("Du hast verloren!");
+		}
+		this.rightc = 0;
+		this.rightp = 0;
 	}
 
 }
