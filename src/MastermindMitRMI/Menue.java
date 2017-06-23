@@ -96,7 +96,7 @@ public class Menue extends JFrame implements SpielInterface{
 		this.runde = 0;
 
 		this.codierer = new JButton("Codierer");
-		this.round = new JButton("Runde Beenden");
+		this.round = new JButton("Vergleichen");
 
 		this.openNewWindow = new OpenWindowListener();
 		this.closeRound = new CloseRoundListener();
@@ -255,7 +255,7 @@ public class Menue extends JFrame implements SpielInterface{
 		
 		System.out.println("Richtige Farbe " + this.rightc);
 		System.out.println("Richtige Position und Farbe " + this.rightp);
-
+		System.out.println("Daten bereit zum Senden!");
 
 		this.runde++;
 

@@ -495,6 +495,15 @@ public class Ratende extends JFrame implements ClientCallbackInterface{
 				
 			}
 			getRundeAnzeige().setText(getRundeAnzeigeText()[getRunde()]);
+			
+			if (this.rightp == 4) {
+
+				System.out.println("Du hast gewonnen!");
+
+			} else if (this.runde == 8) {
+
+				System.out.println("Du hast verloren!");
+			}
 			return true;
 			
 	
