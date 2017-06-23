@@ -227,13 +227,13 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		this.einunddreiﬂig = new JButton(" ");
 		this.zweiunddreiﬂig = new JButton(" ");
 		
-		this.kontroll1 = new JButton(" ");
+		this.kontroll1 = new JButton("");
 		this.kontroll1.setVisible(false);
-		this.kontroll2 = new JButton(" ");
+		this.kontroll2 = new JButton("");
 		this.kontroll2.setVisible(false);
-		this.kontroll3 = new JButton(" ");
+		this.kontroll3 = new JButton("");
 		this.kontroll3.setVisible(false);
-		this.kontroll4 = new JButton(" ");
+		this.kontroll4 = new JButton("");
 		this.kontroll4.setVisible(false);
 		
 		this.best‰tigen = new JButton("Best‰tigen");
