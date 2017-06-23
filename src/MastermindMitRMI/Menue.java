@@ -17,25 +17,13 @@ public class Menue extends JFrame implements SpielInterface{
 	private int rightc;
 	private int runde;
 
-	private JButton codierer;
 	private JButton round;
 
 	private Codierer code;
 
-	private MouseListener openNewWindow;
 	private MouseListener closeRound;
 
 	// Getter und Setter
-	public JButton getCodierer() {
-		return codierer;
-	}
-
-	public void setCodierer(JButton codierer) {
-		this.codierer = codierer;
-	}
-	
-	
-
 	public int getRunde() {
 		return runde;
 	}
@@ -68,13 +56,7 @@ public class Menue extends JFrame implements SpielInterface{
 		this.code = code;
 	}
 
-	public MouseListener getOpenNewWindow() {
-		return openNewWindow;
-	}
 
-	public void setOpenNewWindow(MouseListener openNewWindow) {
-		this.openNewWindow = openNewWindow;
-	}
 
 	// Konstruktor für Menue
 	public Menue() {
@@ -89,53 +71,18 @@ public class Menue extends JFrame implements SpielInterface{
 	// Initialisiert die Komponenten von Menue
 
 	private void initialisiereKomponenten() {
+		this.code = new Codierer();
+		
 		this.farbenRaten = new int[4];
 		
 		this.rightp = 0;
 		this.rightc = 0;
 		this.runde = 0;
 
-		this.codierer = new JButton("Codierer");
+		
 		this.round = new JButton("Vergleichen");
 
-		this.openNewWindow = new OpenWindowListener();
 		this.closeRound = new CloseRoundListener();
-	}
-
-	// Innere Klasse für das Öffnen eines neues Fensters
-	private class OpenWindowListener implements MouseListener {
-
-		public void mouseClicked(MouseEvent e) {
-			if (e.getSource() == codierer) {
-				openCodeWindow();
-
-			} 
-
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
 	}
 
 	// Listener zum Beenden der Runde
@@ -177,24 +124,10 @@ public class Menue extends JFrame implements SpielInterface{
 	private void round() {
 		vergleich();
 	}
-
-	// Methode legt ein neues Objekt Codierer an und blendet danach den Button
-	// aus
-	private void openCodeWindow() {
-
-		this.code = new Codierer();
-		codierer.setVisible(false);
-
-	}
-
-	// Methode legt ein neues Objekt Ratende an und blendet danach den Button
-	// aus
-
+	
 	// Übergibt den Button ihre Listener
 	private void registrierelistener() {
 
-		this.codierer.addMouseListener(this.openNewWindow);
-		
 		this.round.addMouseListener(this.closeRound);
 
 	}
@@ -209,7 +142,6 @@ public class Menue extends JFrame implements SpielInterface{
 
 		c.ipady = 40;
 		c.ipadx = 40;
-		this.getContentPane().add(codierer, c);
 
 		c.gridy = 2;
 		this.getContentPane().add(round, c);
