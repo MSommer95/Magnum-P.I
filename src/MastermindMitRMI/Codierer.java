@@ -295,8 +295,6 @@ public class Codierer extends JFrame {
 		
 		this.counter = 0;
 		
-		
-		
 	}
 	//Wählt die Farbe für die Buttons aus
 	private void farbe() {

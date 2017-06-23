@@ -49,6 +49,5 @@ public class Client {
 		} catch (Exception e) {
 			System.out.println("HelloClient exception: " + e);
 		}
-
 	}
 }

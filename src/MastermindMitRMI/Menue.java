@@ -65,6 +65,7 @@ public class Menue extends JFrame implements SpielInterface {
 		this.ordneKomponentenAn();
 		this.setVisible(true);
 	}
+	
 	// Initialisiert die Komponenten von Menue
 	private void initialisiereKomponenten() {
 		this.code = new Codierer();
@@ -151,6 +152,7 @@ public class Menue extends JFrame implements SpielInterface {
 	public boolean starteSpiel(int starter) throws RemoteException {
 		return true;
 	}
+	
 	//Verarbeitet die Daten, die der Server bekommt
 	@Override
 	public boolean spielzug(int f1, int f2, int f3, int f4) throws RemoteException {
@@ -162,6 +164,7 @@ public class Menue extends JFrame implements SpielInterface {
 
 		return true;
 	}
+	
 	//Methode zum Vergleichen der Farbfolgen
 	public void vergleich() {	
 		this.rightc = 0;

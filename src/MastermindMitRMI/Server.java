@@ -57,6 +57,5 @@ public class Server {
 				System.out.println("HelloClient exception: " + e);
 			}
 		}
-
 	}
 }
