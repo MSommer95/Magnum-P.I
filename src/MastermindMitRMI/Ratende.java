@@ -85,7 +85,12 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	private JButton dreißig;
 	private JButton einunddreißig;
 	private JButton zweiunddreißig;
-
+	
+	private JButton kontroll1;
+	private JButton kontroll2;
+	private JButton kontroll3;
+	private JButton kontroll4;
+	
 	private JButton bestätigen;
 
 	private JSlider sliderFarbe;
@@ -93,7 +98,12 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 
 	private ChangeListener farbListener;
 	private MouseListener bestätigenListener;
-
+	
+	private Color f1;
+	private Color f2;
+	private Color f3;
+	private Color f4;
+	
 	// getter setter
 	public int getRunde() {
 		return runde;
@@ -165,7 +175,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	// Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
 		this.zeichen = new String[] { " | ", " X " };
-
+		
 		this.bestätigt = 0;
 		this.runde = 0;
 
@@ -184,38 +194,48 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
 		this.rcolor = new int[4];
 
-		this.eins = new JButton("1");
-		this.zwei = new JButton("2");
-		this.drei = new JButton("3");
-		this.vier = new JButton("4");
-		this.fünf = new JButton("5");
-		this.sechs = new JButton("6");
-		this.sieben = new JButton("7");
-		this.acht = new JButton("8");
-		this.neun = new JButton("9");
-		this.zehn = new JButton("10");
-		this.elf = new JButton("11");
-		this.zwölf = new JButton("12");
-		this.dreizehn = new JButton("13");
-		this.vierzehn = new JButton("14");
-		this.fünfzehn = new JButton("15");
-		this.sechzehn = new JButton("16");
-		this.siebzehn = new JButton("17");
-		this.achtzehn = new JButton("18");
-		this.neunzehn = new JButton("19");
-		this.zwanzig = new JButton("20");
-		this.einundzwanzig = new JButton("21");
-		this.zweiundzwanzig = new JButton("22");
-		this.dreiundzwanzig = new JButton("23");
-		this.vierundzwanzig = new JButton("24");
-		this.fünfundzwanzig = new JButton("25");
-		this.sechsundzwanzig = new JButton("26");
-		this.siebenundzwanzig = new JButton("27");
-		this.achtundzwanzig = new JButton("28");
-		this.neunundzwanzig = new JButton("29");
-		this.dreißig = new JButton("30");
-		this.einunddreißig = new JButton("31");
-		this.zweiunddreißig = new JButton("32");
+		this.eins = new JButton(" ");
+		this.zwei = new JButton(" ");
+		this.drei = new JButton(" ");
+		this.vier = new JButton(" ");
+		this.fünf = new JButton(" ");
+		this.sechs = new JButton(" ");
+		this.sieben = new JButton(" ");
+		this.acht = new JButton(" ");
+		this.neun = new JButton(" ");
+		this.zehn = new JButton(" ");
+		this.elf = new JButton(" ");
+		this.zwölf = new JButton(" ");
+		this.dreizehn = new JButton(" ");
+		this.vierzehn = new JButton(" ");
+		this.fünfzehn = new JButton(" ");
+		this.sechzehn = new JButton(" ");
+		this.siebzehn = new JButton(" ");
+		this.achtzehn = new JButton(" ");
+		this.neunzehn = new JButton(" ");
+		this.zwanzig = new JButton(" ");
+		this.einundzwanzig = new JButton(" ");
+		this.zweiundzwanzig = new JButton(" ");
+		this.dreiundzwanzig = new JButton(" ");
+		this.vierundzwanzig = new JButton(" ");
+		this.fünfundzwanzig = new JButton(" ");
+		this.sechsundzwanzig = new JButton(" ");
+		this.siebenundzwanzig = new JButton(" ");
+		this.achtundzwanzig = new JButton(" ");
+		this.neunundzwanzig = new JButton(" ");
+		this.dreißig = new JButton(" ");
+		this.einunddreißig = new JButton(" ");
+		this.zweiunddreißig = new JButton(" ");
+		
+		this.kontroll1 = new JButton(" ");
+		this.kontroll1.setVisible(false);
+		this.kontroll2 = new JButton(" ");
+		this.kontroll2.setVisible(false);
+		this.kontroll3 = new JButton(" ");
+		this.kontroll3.setVisible(false);
+		this.kontroll4 = new JButton(" ");
+		this.kontroll4.setVisible(false);
+		
 		this.bestätigen = new JButton("Bestätigen");
 
 		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3",
@@ -223,7 +243,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
 				dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
 				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, fünfundzwanzig, sechsundzwanzig, siebenundzwanzig,
-				achtundzwanzig, neunundzwanzig, dreißig, einunddreißig, zweiunddreißig };
+				achtundzwanzig, neunundzwanzig, dreißig, einunddreißig, zweiunddreißig, kontroll1, kontroll2, kontroll3, kontroll4};
 
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
@@ -373,44 +393,48 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		d.fill = GridBagConstraints.HORIZONTAL;
 		d.insets = new Insets(4, 4, 4, 4);
 
-		for (int i = 0; i <= buttonsammler.length; i++) {
+		for (int i = 0; i <= buttonsammler.length-1; i++) {
 
 			if (i <= 3) {
-				d.gridy = 8;
+				d.gridy = 9;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 3 && i <= 7) {
-				d.gridy = 7;
+				d.gridy = 8;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 7 && i <= 11) {
-				d.gridy = 6;
+				d.gridy = 7;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 11 && i <= 15) {
-				d.gridy = 5;
+				d.gridy = 6;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 15 && i <= 19) {
-				d.gridy = 4;
+				d.gridy = 5;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 19 && i <= 23) {
-				d.gridy = 3;
+				d.gridy = 4;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 23 && i <= 27) {
-				d.gridy = 2;
+				d.gridy = 3;
 				centerP.add(buttonsammler[i], d);
 			}
 
 			if (i > 27 && i <= 31) {
+				d.gridy = 2;
+				centerP.add(buttonsammler[i], d);
+			}
+			if(i > 31 && i<=35){
 				d.gridy = 1;
 				centerP.add(buttonsammler[i], d);
 			}
@@ -490,17 +514,45 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 			}
 
 		}
-		getRundeAnzeige().setText(getRundeAnzeigeText()[getRunde()]);
-
 		if (this.rightp == 4) {
 
 			System.out.println("Du hast gewonnen!");
 
 		} else if (this.runde == 8) {
 
+			System.out.println("Codierer hat gewonnen!");
+		}
+		getRundeAnzeige().setText(getRundeAnzeigeText()[getRunde()]);
+
+		if (this.rightp == 4) {
+
+			System.out.println("Du hast gewonnen!");
+			this.kontroll1.setVisible(true);
+			this.kontroll2.setVisible(true);
+			this.kontroll3.setVisible(true);
+			this.kontroll4.setVisible(true);
+
+		} else if (this.runde == 8) {
+
 			System.out.println("Du hast verloren!");
+			this.kontroll1.setVisible(true);
+			this.kontroll2.setVisible(true);
+			this.kontroll3.setVisible(true);
+			this.kontroll4.setVisible(true);
 		}
 		return true;
 
+	}
+	@Override
+	public boolean clientFarbData(int f1, int f2, int f3, int f4) throws RemoteException {
+		this.f1 = new Color(f1, true);
+		this.kontroll1.setBackground(this.f1);
+		this.f2 = new Color(f2, true);
+		this.kontroll2.setBackground(this.f2);
+		this.f3 = new Color(f3, true);
+		this.kontroll3.setBackground(this.f3);
+		this.f4 = new Color(f4, true);
+		this.kontroll4.setBackground(this.f4);
+		return true;
 	}
 }

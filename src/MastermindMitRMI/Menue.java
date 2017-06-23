@@ -189,11 +189,11 @@ public class Menue extends JFrame implements SpielInterface {
 
 		if (this.rightp == 4) {
 
-			System.out.println("Du hast gewonnen!");
+			System.out.println("Ratende hat gewonnen!");
 
 		} else if (this.runde == 8) {
 
-			System.out.println("Du hast verloren!");
+			System.out.println("Du hast gewonnen!");
 		}
 
 	}
