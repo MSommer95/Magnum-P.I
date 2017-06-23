@@ -9,7 +9,6 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 //Der Codierer entscheidet sich für eine Farbfolge
-
 public class Codierer extends JFrame {
 	SpielInterface spielInt;
 	private Color[] farbe;
@@ -211,8 +210,9 @@ public class Codierer extends JFrame {
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
 
-		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3", "Aktuelle Runde: 4", "Aktuelle Runde: 5", "Aktuelle Runde: 6",
-				"Aktuelle Runde: 7", "Aktuelle Runde: 8" };
+		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3",
+				"Aktuelle Runde: 4", "Aktuelle Runde: 5", "Aktuelle Runde: 6", "Aktuelle Runde: 7",
+				"Aktuelle Runde: 8" };
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.counter = 0;
 	}
@@ -225,7 +225,7 @@ public class Codierer extends JFrame {
 			try {
 				bestätigen();
 			} catch (RemoteException e) {
-				
+
 				e.printStackTrace();
 			}
 		}
@@ -281,20 +281,24 @@ public class Codierer extends JFrame {
 
 					this.counter++;
 				}
-			}			
+			}
 		}
 
 		if (counter > 4) {
 
 			System.out.println("Doppelte Farben sind nicht erlaubt. Bitte wähle eine andere Farbfolge.");
 		}
-
+		else{
+			this.bestätigt++;
+			System.out.println("Codierer hat seine Farbfolge bestätigt!");
+		}
+		
 		this.counter = 0;
-		this.bestätigt++;
-
-		System.out.println("Codierer hat seine Farbfolge bestätigt!");
+		
+		
+		
 	}
-
+	//Wählt die Farbe für die Buttons aus
 	private void farbe() {
 
 		int i = sliderFarbe.getValue() - 1;

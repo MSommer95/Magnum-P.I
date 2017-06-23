@@ -6,12 +6,11 @@ import java.rmi.RemoteException;
 
 import javax.swing.*;
 import javax.swing.event.*;
-//Erklärung (Zwischenstand):
+
 //Der Codierer und der Ratende müssen beide auf Bestätigen geklickt haben, bevor die Runde beendet werden kann (Sonst NullPointerExeption)
 
 //Menü für das Spiel (Spieler wählen ihre  Rolle)
-
-public class Menue extends JFrame implements SpielInterface{
+public class Menue extends JFrame implements SpielInterface {
 	private int[] farbenRaten;
 	private int rightp;
 	private int rightc;
@@ -56,8 +55,6 @@ public class Menue extends JFrame implements SpielInterface{
 		this.code = code;
 	}
 
-
-
 	// Konstruktor für Menue
 	public Menue() {
 		super("Menü");
@@ -69,17 +66,15 @@ public class Menue extends JFrame implements SpielInterface{
 		this.setVisible(true);
 	}
 	// Initialisiert die Komponenten von Menue
-
 	private void initialisiereKomponenten() {
 		this.code = new Codierer();
-		
+
 		this.farbenRaten = new int[4];
-		
+
 		this.rightp = 0;
 		this.rightc = 0;
 		this.runde = 0;
 
-		
 		this.round = new JButton("Vergleichen");
 
 		this.closeRound = new CloseRoundListener();
@@ -122,9 +117,12 @@ public class Menue extends JFrame implements SpielInterface{
 
 	// Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
 	private void round() {
-		vergleich();
+		if(code.getBestätigt()>=1){
+		vergleich();}
+		else
+			System.out.println("Der Codierer muss seine Farbfolge bestätigen!");
 	}
-	
+
 	// Übergibt den Button ihre Listener
 	private void registrierelistener() {
 
@@ -148,26 +146,24 @@ public class Menue extends JFrame implements SpielInterface{
 
 	}
 
-	
-	
 	@Override
+	//Startet im Zusammenhang mit dem Server das Spiel
 	public boolean starteSpiel(int starter) throws RemoteException {
-		 return true;
-	}
-
-	@Override
-	public boolean spielzug(int f1, int f2, int f3, int f4) throws RemoteException {
-		
-			this.farbenRaten[0] = f1;
-			this.farbenRaten[1] = f2;
-			this.farbenRaten[2] = f3;
-			this.farbenRaten[3] = f4;
-
-			
 		return true;
 	}
-	
-	public void vergleich(){
+	//Verarbeitet die Daten, die der Server bekommt
+	@Override
+	public boolean spielzug(int f1, int f2, int f3, int f4) throws RemoteException {
+
+		this.farbenRaten[0] = f1;
+		this.farbenRaten[1] = f2;
+		this.farbenRaten[2] = f3;
+		this.farbenRaten[3] = f4;
+
+		return true;
+	}
+	//Methode zum Vergleichen der Farbfolgen
+	public void vergleich() {	
 		this.rightc = 0;
 		this.rightp = 0;
 		for (int i = 0; i < code.getCcolor().length; i++) {
@@ -184,7 +180,7 @@ public class Menue extends JFrame implements SpielInterface{
 				}
 			}
 		}
-		
+
 		System.out.println("Richtige Farbe " + this.rightc);
 		System.out.println("Richtige Position und Farbe " + this.rightp);
 		System.out.println("Daten bereit zum Senden!");
@@ -199,7 +195,7 @@ public class Menue extends JFrame implements SpielInterface{
 
 			System.out.println("Du hast verloren!");
 		}
-		
+
 	}
 
 }
