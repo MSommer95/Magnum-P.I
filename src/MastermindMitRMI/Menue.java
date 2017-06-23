@@ -33,8 +33,32 @@ public class Menue extends JFrame implements SpielInterface{
 	public void setCodierer(JButton codierer) {
 		this.codierer = codierer;
 	}
+	
+	
 
+	public int getRunde() {
+		return runde;
+	}
 
+	public void setRunde(int runde) {
+		this.runde = runde;
+	}
+
+	public int getRightp() {
+		return rightp;
+	}
+
+	public void setRightp(int rightp) {
+		this.rightp = rightp;
+	}
+
+	public int getRightc() {
+		return rightc;
+	}
+
+	public void setRightc(int rightc) {
+		this.rightc = rightc;
+	}
 
 	public Codierer getCode() {
 		return code;
@@ -196,25 +220,24 @@ public class Menue extends JFrame implements SpielInterface{
 	
 	@Override
 	public boolean starteSpiel(int starter) throws RemoteException {
-		this.runde = starter;
 		 return true;
 	}
 
 	@Override
-	public boolean spielzug(int f1, int f2, int f3, int f4, int runde) throws RemoteException {
+	public boolean spielzug(int f1, int f2, int f3, int f4) throws RemoteException {
 		
 			this.farbenRaten[0] = f1;
 			this.farbenRaten[1] = f2;
 			this.farbenRaten[2] = f3;
 			this.farbenRaten[3] = f4;
-			this.runde = runde;
 
-			code.getRundeAnzeige().setText(code.getRundeAnzeigeText()[this.runde]);
+			
 		return true;
 	}
 	
 	public void vergleich(){
-		
+		this.rightc = 0;
+		this.rightp = 0;
 		for (int i = 0; i < code.getCcolor().length; i++) {
 			if (code.getCcolor()[i].getRGB() == this.farbenRaten[i]) {
 				this.rightp++;
@@ -244,8 +267,7 @@ public class Menue extends JFrame implements SpielInterface{
 
 			System.out.println("Du hast verloren!");
 		}
-		this.rightc = 0;
-		this.rightp = 0;
+		
 	}
 
 }

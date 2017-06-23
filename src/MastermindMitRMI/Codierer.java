@@ -211,8 +211,8 @@ public class Codierer extends JFrame {
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
 
-		this.rundeAnzeigeText = new String[] { "Runde 1", "Runde 2", "Runde 3", "Runde 4", "Runde 5", "Runde 6",
-				"Runde 7", "Runde 8" };
+		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3", "Aktuelle Runde: 4", "Aktuelle Runde: 5", "Aktuelle Runde: 6",
+				"Aktuelle Runde: 7", "Aktuelle Runde: 8" };
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.counter = 0;
 	}

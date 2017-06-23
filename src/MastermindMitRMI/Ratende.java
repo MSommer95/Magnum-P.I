@@ -19,22 +19,40 @@ import javax.swing.event.ChangeListener;
 
 //Der Ratende muss in 8 Versuchen die Folge erraten haben
 
-public class Ratende extends JFrame {
+public class Ratende extends JFrame implements ClientCallbackInterface{
 	private Color[] farbe;
 	private int[] rcolor;
-
+	
+	private int rightp;
+	private int rightc;
 	private int runde;
 	private int bestätigt;
 	
+	private String[] zeichen;
 	private String[] rundeAnzeigeText;
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
-
+	
+	private JLabel tips1;
+	private JLabel tips2;
+	private JLabel hilfe1;
+	private JLabel hilfe2;
+	private JLabel hilfe3;
+	private JLabel hilfe4;
+	private JLabel hilfe5;
+	private JLabel hilfe6;
+	private JLabel hilfe7;
+	private JLabel hilfe8;
+	private JLabel leerraum;
+	private JLabel legende;
+	
 	private Panel southP;
 	private Panel centerP;
 	private Panel northP;
-
+	private Panel westP;
+	
+	private JLabel[] jlabelArray;
 	private JButton[] buttonsammler;
 
 	private JButton eins;
@@ -147,6 +165,8 @@ public class Ratende extends JFrame {
 
 	// Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
+		this.zeichen = new String[] {" | "," X "};
+		
 		this.bestätigt = 0;
 		this.runde = 0;
 
@@ -158,6 +178,9 @@ public class Ratende extends JFrame {
 
 		this.northP = new Panel();
 		this.northP.setBackground(new Color(250, 240, 230));
+		
+		this.westP = new Panel();
+		this.westP.setBackground(new Color(250, 240, 230));
 		
 		
 		this.farbe = new Color[] { Color.BLACK, Color.RED, Color.YELLOW, Color.BLUE, Color.WHITE, Color.GREEN };
@@ -197,8 +220,8 @@ public class Ratende extends JFrame {
 		this.zweiunddreißig = new JButton("32");
 		this.bestätigen = new JButton("Bestätigen");
 
-		this.rundeAnzeigeText = new String[] { "Runde 1", "Runde 2", "Runde 3", "Runde 4", "Runde 5", "Runde 6",
-				"Runde 7", "Runde 8" };
+		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3", "Aktuelle Runde:", "Aktuelle Runde: 5", "Aktuelle Runde: 6",
+				"Aktuelle Runde: 7", "Aktuelle Runde: 8" };
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn, elf, zwölf,
 				dreizehn, vierzehn, fünfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
 				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, fünfundzwanzig, sechsundzwanzig, siebenundzwanzig,
@@ -207,7 +230,20 @@ public class Ratende extends JFrame {
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-
+		
+		this.hilfe1 = new JLabel("Runde 1: ");
+		this.hilfe2 = new JLabel("Runde 2: ");
+		this.hilfe3 = new JLabel("Runde 3: ");
+		this.hilfe4 = new JLabel("Runde 4: ");
+		this.hilfe5 = new JLabel("Runde 5: ");
+		this.hilfe6 = new JLabel("Runde 6: ");
+		this.hilfe7 = new JLabel("Runde 7: ");
+		this.hilfe8 = new JLabel("Runde 8: ");
+		this.leerraum = new JLabel(" ");
+		
+		this.jlabelArray = new JLabel[] {hilfe1,hilfe2,hilfe3,hilfe4,hilfe5,hilfe6,hilfe7,hilfe8};
+		this.legende = new JLabel("Richtige Farbe:  |     Richtige Poition & Farbe:  X");
+		
 		this.farbListener = new FarbListener();
 		this.bestätigenListener = new BestätigenListener();
 
@@ -383,7 +419,86 @@ public class Ratende extends JFrame {
 				d.gridy = 1;
 				centerP.add(buttonsammler[i], d);
 			}
+			
 		}
+		add(westP, BorderLayout.WEST);
+		westP.setLayout(new GridBagLayout());
+		
+	
+		
+		
+		GridBagConstraints f = new GridBagConstraints();
+		f.fill = GridBagConstraints.HORIZONTAL;
+		f.insets = new Insets(1, 1, 1, 1);
+		
+		f.gridy = 1;
+		f.gridx = 2;
+		f.ipady = 17;
+		westP.add(legende,f);
+		
+		f.gridy = 2;
+		f.gridx = 0;
+		westP.add(hilfe8,f);
+		
+		f.gridy = 3;
+		f.gridx = 0;
+		westP.add(hilfe7,f);
+		
+		f.gridy = 4;
+		f.gridx = 0;
+		westP.add(hilfe6,f);
+		
+		f.gridy = 5;
+		f.gridx = 0;
+		westP.add(hilfe5,f);
+		
+		f.gridy = 6;
+		f.gridx = 0;
+		westP.add(hilfe4,f);
+		
+		f.gridy = 7;
+		f.gridx = 0;
+		westP.add(hilfe3,f);
+		
+		f.gridy = 8;
+		f.gridx = 0;
+		westP.add(hilfe2,f);
+		
+		f.gridy = 9;
+		f.gridx = 0;
+		westP.add(hilfe1,f);	
+		
+		f.gridy = 10;
+		f.gridx = 9;
+		f.ipady = 20;
+		westP.add(leerraum, f);
 	}
-
+	@Override
+	public boolean clientData(int richtigP, int richtigC, int runde) throws RemoteException {
+		this.rightp = richtigP;
+		this.rightc = richtigC;
+		this.runde = runde;
+		
+		System.out.println("Richtige Position: "+this.rightp + " richtige C: " + this.rightc);
+		
+			if(this.rightp > 0){
+			
+				for(int y=0;y<=this.rightp-1;y++){
+				this.jlabelArray[this.runde-1].setText(this.jlabelArray[this.runde-1].getText()+ this.zeichen[1]);;
+			}
+			}
+			if(this.rightc>0){
+			
+				for(int y=0;y<=this.rightc-1;y++){
+				this.jlabelArray[this.runde-1].setText(this.jlabelArray[this.runde-1].getText()+ this.zeichen[0]);;
+			}
+				
+			}
+			getRundeAnzeige().setText(getRundeAnzeigeText()[getRunde()]);
+			return true;
+			
+	
+	}
 }
+
+

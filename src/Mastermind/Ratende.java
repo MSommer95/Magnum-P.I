@@ -456,51 +456,52 @@ public class Ratende extends JFrame {
 		
 			
 			
-			GridBagConstraints f = new GridBagConstraints();
-			f.fill = GridBagConstraints.HORIZONTAL;
-			f.insets = new Insets(1, 1, 1, 1);
 			
-			f.gridy = 1;
-			f.gridx = 2;
-			f.ipady = 17;
-			westP.add(legende,f);
-			
-			f.gridy = 2;
-			f.gridx = 0;
-			westP.add(hilfe8,f);
-			
-			f.gridy = 3;
-			f.gridx = 0;
-			westP.add(hilfe7,f);
-			
-			f.gridy = 4;
-			f.gridx = 0;
-			westP.add(hilfe6,f);
-			
-			f.gridy = 5;
-			f.gridx = 0;
-			westP.add(hilfe5,f);
-			
-			f.gridy = 6;
-			f.gridx = 0;
-			westP.add(hilfe4,f);
-			
-			f.gridy = 7;
-			f.gridx = 0;
-			westP.add(hilfe3,f);
-			
-			f.gridy = 8;
-			f.gridx = 0;
-			westP.add(hilfe2,f);
-			
-			f.gridy = 9;
-			f.gridx = 0;
-			westP.add(hilfe1,f);	
-			
-			f.gridy = 10;
-			f.gridx = 9;
-			f.ipady = 20;
-			westP.add(leerraum, f);
 		}
+		GridBagConstraints f = new GridBagConstraints();
+		f.fill = GridBagConstraints.HORIZONTAL;
+		f.insets = new Insets(1, 1, 1, 1);
+		
+		f.gridy = 1;
+		f.gridx = 2;
+		f.ipady = 17;
+		westP.add(legende,f);
+		
+		f.gridy = 2;
+		f.gridx = 0;
+		westP.add(hilfe8,f);
+		
+		f.gridy = 3;
+		f.gridx = 0;
+		westP.add(hilfe7,f);
+		
+		f.gridy = 4;
+		f.gridx = 0;
+		westP.add(hilfe6,f);
+		
+		f.gridy = 5;
+		f.gridx = 0;
+		westP.add(hilfe5,f);
+		
+		f.gridy = 6;
+		f.gridx = 0;
+		westP.add(hilfe4,f);
+		
+		f.gridy = 7;
+		f.gridx = 0;
+		westP.add(hilfe3,f);
+		
+		f.gridy = 8;
+		f.gridx = 0;
+		westP.add(hilfe2,f);
+		
+		f.gridy = 9;
+		f.gridx = 0;
+		westP.add(hilfe1,f);	
+		
+		f.gridy = 10;
+		f.gridx = 9;
+		f.ipady = 20;
+		westP.add(leerraum, f);
 	}
 }
