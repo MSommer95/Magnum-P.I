@@ -17,10 +17,12 @@ public class Codierer extends JFrame {
 	private int bestätigt;
 	private int counter;
 
+	private String[] aktivität;
 	private String[] rundeAnzeigeText;
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
+	private JLabel labelAktivität;
 
 	private Panel southP;
 	private Panel centerP;
@@ -125,6 +127,14 @@ public class Codierer extends JFrame {
 		return zwei;
 	}
 
+	public String[] getAktivität() {
+		return aktivität;
+	}
+
+	public void setAktivität(String[] aktivität) {
+		this.aktivität = aktivität;
+	}
+
 	public void setZwei(JButton zwei) {
 		this.zwei = zwei;
 	}
@@ -169,6 +179,14 @@ public class Codierer extends JFrame {
 		this.farbListener = farbListener;
 	}
 
+	public JLabel getLabelAktivität() {
+		return labelAktivität;
+	}
+
+	public void setLabelAktivität(JLabel labelAktivität) {
+		this.labelAktivität = labelAktivität;
+	}
+
 	// Konstruktor für Codierer
 	public Codierer() {
 		super("Codierer Screen");
@@ -207,13 +225,17 @@ public class Codierer extends JFrame {
 
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier };
 
-		this.labelSliderButton = new JLabel("Button-Slider");
-		this.labelSliderFarbe = new JLabel("Farbe-Slider");
-
+		this.aktivität = new String[] { "Bitte gebe eine 1 in die Console ein.",
+				"Bitte drücke den 'Vergleichen' Button.", "Codierer, bitte bestätige deine Farbfolge." };
 		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3",
 				"Aktuelle Runde: 4", "Aktuelle Runde: 5", "Aktuelle Runde: 6", "Aktuelle Runde: 7",
 				"Aktuelle Runde: 8" };
+
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
+		this.labelAktivität = new JLabel(this.aktivität[2]);
+		this.labelSliderButton = new JLabel("Button-Slider");
+		this.labelSliderFarbe = new JLabel("Farbe-Slider");
+
 		this.counter = 0;
 	}
 
@@ -287,16 +309,17 @@ public class Codierer extends JFrame {
 		if (counter > 4) {
 
 			System.out.println("Doppelte Farben sind nicht erlaubt. Bitte wähle eine andere Farbfolge.");
-		}
-		else{
+		} else {
 			this.bestätigt++;
 			System.out.println("Codierer hat seine Farbfolge bestätigt!");
 		}
-		
+
 		this.counter = 0;
-		
+		this.labelAktivität.setText(this.aktivität[0]);
+
 	}
-	//Wählt die Farbe für die Buttons aus
+
+	// Wählt die Farbe für die Buttons aus
 	private void farbe() {
 
 		int i = sliderFarbe.getValue() - 1;
@@ -322,8 +345,15 @@ public class Codierer extends JFrame {
 	// Organisationsmethode für die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
 
+		northP.setLayout(new GridBagLayout());
+		GridBagConstraints d = new GridBagConstraints();
+		d.fill = GridBagConstraints.HORIZONTAL;
+		d.insets = new Insets(4, 4, 4, 4);
+
 		add(northP, BorderLayout.NORTH);
-		northP.add(rundeAnzeige);
+		northP.add(rundeAnzeige, d);
+		d.gridy = 2;
+		northP.add(labelAktivität, d);
 
 		add(southP, BorderLayout.SOUTH);
 		southP.setLayout(new GridBagLayout());

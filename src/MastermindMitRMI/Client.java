@@ -10,13 +10,14 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.RemoteServer;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
+
 //Klasse für den Client
 public class Client {
 	SpielInterface myClient;
 
 	public static void main(String[] args) throws RemoteException, NotBoundException {
 		Ratende ratender = new Ratende();
-		//Legt eine Registry an und "startet" den Client Server
+		// Legt eine Registry an und "startet" den Client Server
 		try {
 
 			LocateRegistry.createRegistry(1091);
@@ -28,7 +29,7 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Ruft die Methode vom Codierer auf, um ihm die Daten zu senden
+		// Ruft die Methode vom Codierer auf, um ihm die Daten zu senden
 		try {
 
 			SpielInterface clientRatende = (SpielInterface) Naming.lookup("rmi://192.168.178.20:1090/stub");
@@ -36,7 +37,6 @@ public class Client {
 
 			while (clientRatende.starteSpiel(1)) {
 				// Tippe 1 in die Console damit das Array übermittelt wird
-				System.out.println("Gebe 1 ein, um dem Server Daten zu senden! ");
 				int s = new Scanner(System.in).nextInt();
 				if (s == 1) {
 					ratender.setRunde(ratender.getRunde() + 1);
@@ -45,7 +45,9 @@ public class Client {
 					System.out.println("Gesendet");
 
 				}
+				ratender.getLabelAktivitätR().setText("Warte auf die Daten vom Server.");
 			}
+
 		} catch (Exception e) {
 			System.out.println("HelloClient exception: " + e);
 		}

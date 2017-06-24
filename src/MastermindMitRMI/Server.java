@@ -25,34 +25,34 @@ public class Server {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		System.out.println("Gebe 1 ein, wenn der Client gestartet wurde! ");
 		int c = new Scanner(System.in).nextInt();
 		if (c == 1) {
 			// Ruft die Methode vom Ratenden auf, um ihm die Daten zu senden
+			spiel.getCode().getLabelAktivität().setText("Warte auf die Daten vom Client.");
 			try {
 
 				ClientCallbackInterface callbackClient = (ClientCallbackInterface) Naming
 						.lookup("rmi://192.168.178.20:1091/stubi");
 				System.out.println("Server-Client bereit!");
-				callbackClient.clientFarbData(spiel.getCode().getCcolor()[0].getRGB(),
-						spiel.getCode().getCcolor()[1].getRGB(), spiel.getCode().getCcolor()[2].getRGB(),
-						spiel.getCode().getCcolor()[3].getRGB());
 				int i = 1;
 				while (i == 1) {
 					// Tippe 1 in die Console damit das Array übermittelt wird
-					System.out.println("Gebe 1 ein, um dem Client Daten zu senden! ");
 					int s = new Scanner(System.in).nextInt();
 					if (s == 1) {
-						callbackClient.clientData(spiel.getRightp(), spiel.getRightc(), spiel.getRunde());
+
 						spiel.getCode().getRundeAnzeige()
 								.setText(spiel.getCode().getRundeAnzeigeText()[spiel.getRunde()]);
+						callbackClient.clientFarbData(spiel.getCode().getCcolor()[0].getRGB(),
+								spiel.getCode().getCcolor()[1].getRGB(), spiel.getCode().getCcolor()[2].getRGB(),
+								spiel.getCode().getCcolor()[3].getRGB());
+						callbackClient.clientData(spiel.getRightp(), spiel.getRightc(), spiel.getRunde());
 
-						
 						System.out.println("Gesendet");
+						spiel.getCode().getLabelAktivität().setText("Warte auf die Daten vom Client.");
+						spiel.winner();
 					}
 				}
-				
+
 			} catch (Exception e) {
 				System.out.println("HelloClient exception: " + e);
 			}

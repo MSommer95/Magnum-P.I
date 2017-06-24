@@ -28,11 +28,13 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	private int runde;
 	private int best‰tigt;
 
+	private String[] aktivit‰tR;
 	private String[] zeichen;
 	private String[] rundeAnzeigeText;
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
+	private JLabel labelAktivit‰tR;
 
 	private JLabel hilfe1;
 	private JLabel hilfe2;
@@ -85,12 +87,12 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	private JButton dreiﬂig;
 	private JButton einunddreiﬂig;
 	private JButton zweiunddreiﬂig;
-	
+
 	private JButton kontroll1;
 	private JButton kontroll2;
 	private JButton kontroll3;
 	private JButton kontroll4;
-	
+
 	private JButton best‰tigen;
 
 	private JSlider sliderFarbe;
@@ -98,15 +100,32 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 
 	private ChangeListener farbListener;
 	private MouseListener best‰tigenListener;
-	
+
 	private Color f1;
 	private Color f2;
 	private Color f3;
 	private Color f4;
-	
+
 	// getter setter
+
 	public int getRunde() {
 		return runde;
+	}
+
+	public String[] getAktivit‰tR() {
+		return aktivit‰tR;
+	}
+
+	public void setAktivit‰tR(String[] aktivit‰tR) {
+		this.aktivit‰tR = aktivit‰tR;
+	}
+
+	public JLabel getLabelAktivit‰tR() {
+		return labelAktivit‰tR;
+	}
+
+	public void setLabelAktivit‰tR(JLabel labelAktivit‰tR) {
+		this.labelAktivit‰tR = labelAktivit‰tR;
 	}
 
 	public void setRunde(int runde) {
@@ -175,7 +194,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	// Initialisiert die Komponenten von Codierer
 	private void initialisiereKomponenten() {
 		this.zeichen = new String[] { " | ", " X " };
-		
+
 		this.best‰tigt = 0;
 		this.runde = 0;
 
@@ -226,7 +245,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		this.dreiﬂig = new JButton(" ");
 		this.einunddreiﬂig = new JButton(" ");
 		this.zweiunddreiﬂig = new JButton(" ");
-		
+
 		this.kontroll1 = new JButton("");
 		this.kontroll1.setVisible(false);
 		this.kontroll2 = new JButton("");
@@ -235,19 +254,23 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		this.kontroll3.setVisible(false);
 		this.kontroll4 = new JButton("");
 		this.kontroll4.setVisible(false);
-		
+
 		this.best‰tigen = new JButton("Best‰tigen");
 
+		this.aktivit‰tR = new String[] { "Bitte gebe eine 1 in die Console ein.",
+				"Ratender, bitte best‰tige deine Farbfolge." };
 		this.rundeAnzeigeText = new String[] { "Aktuelle Runde: 1", "Aktuelle Runde: 2", "Aktuelle Runde: 3",
 				"Aktuelle Runde:", "Aktuelle Runde: 5", "Aktuelle Runde: 6", "Aktuelle Runde: 7", "Aktuelle Runde: 8" };
 		this.buttonsammler = new JButton[] { eins, zwei, drei, vier, f¸nf, sechs, sieben, acht, neun, zehn, elf, zwˆlf,
 				dreizehn, vierzehn, f¸nfzehn, sechzehn, siebzehn, achtzehn, neunzehn, zwanzig, einundzwanzig,
 				zweiundzwanzig, dreiundzwanzig, vierundzwanzig, f¸nfundzwanzig, sechsundzwanzig, siebenundzwanzig,
-				achtundzwanzig, neunundzwanzig, dreiﬂig, einunddreiﬂig, zweiunddreiﬂig, kontroll1, kontroll2, kontroll3, kontroll4};
+				achtundzwanzig, neunundzwanzig, dreiﬂig, einunddreiﬂig, zweiunddreiﬂig, kontroll1, kontroll2, kontroll3,
+				kontroll4 };
 
 		this.rundeAnzeige = new JLabel(this.rundeAnzeigeText[0]);
 		this.labelSliderButton = new JLabel("Button-Slider");
 		this.labelSliderFarbe = new JLabel("Farbe-Slider");
+		this.labelAktivit‰tR = new JLabel(this.aktivit‰tR[1]);
 
 		this.hilfe1 = new JLabel("Runde 1: ");
 		this.hilfe2 = new JLabel("Runde 2: ");
@@ -319,6 +342,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 
 		System.out.println("Der Ratende hat seine Farbfolge best‰tigt!");
 		this.best‰tigt = 0;
+		this.labelAktivit‰tR.setText(this.aktivit‰tR[0]);
 	}
 
 	// Listener f[r die Slider
@@ -359,8 +383,15 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	// Organisationsmethode f¸r die Komponenten (Darstellung)
 	private void ordneKomponentenAn() {
 
+		northP.setLayout(new GridBagLayout());
+		GridBagConstraints l = new GridBagConstraints();
+		l.fill = GridBagConstraints.HORIZONTAL;
+		l.insets = new Insets(4, 4, 4, 4);
+
 		add(northP, BorderLayout.NORTH);
-		northP.add(rundeAnzeige);
+		northP.add(rundeAnzeige, l);
+		l.gridy = 2;
+		northP.add(labelAktivit‰tR, l);
 
 		add(southP, BorderLayout.SOUTH);
 
@@ -393,7 +424,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		d.fill = GridBagConstraints.HORIZONTAL;
 		d.insets = new Insets(4, 4, 4, 4);
 
-		for (int i = 0; i <= buttonsammler.length-1; i++) {
+		for (int i = 0; i <= buttonsammler.length - 1; i++) {
 
 			if (i <= 3) {
 				d.gridy = 9;
@@ -434,7 +465,7 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 				d.gridy = 2;
 				centerP.add(buttonsammler[i], d);
 			}
-			if(i > 31 && i<=35){
+			if (i > 31 && i <= 35) {
 				d.gridy = 1;
 				centerP.add(buttonsammler[i], d);
 			}
@@ -491,7 +522,22 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	}
 
 	@Override
-	//Verarbeitet die Daten, die der Client bekommt.
+	public boolean clientFarbData(int f1, int f2, int f3, int f4) throws RemoteException {
+		this.f1 = new Color(f1, true);
+		this.kontroll1.setBackground(this.f1);
+		this.f2 = new Color(f2, true);
+		this.kontroll2.setBackground(this.f2);
+		this.f3 = new Color(f3, true);
+		this.kontroll3.setBackground(this.f3);
+		this.f4 = new Color(f4, true);
+		this.kontroll4.setBackground(this.f4);
+
+		this.labelAktivit‰tR.setText(this.aktivit‰tR[1]);
+		return true;
+	}
+
+	@Override
+	// Verarbeitet die Daten, die der Client bekommt.
 	public boolean clientData(int richtigP, int richtigC, int runde) throws RemoteException {
 		this.rightp = richtigP;
 		this.rightc = richtigC;
@@ -503,38 +549,34 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 
 			for (int y = 0; y <= this.rightp - 1; y++) {
 				this.jlabelArray[this.runde - 1].setText(this.jlabelArray[this.runde - 1].getText() + this.zeichen[1]);
-				;
+
 			}
 		}
 		if (this.rightc > 0) {
 
 			for (int y = 0; y <= this.rightc - 1; y++) {
 				this.jlabelArray[this.runde - 1].setText(this.jlabelArray[this.runde - 1].getText() + this.zeichen[0]);
-				;
+
 			}
 
 		}
 		if (this.rightp == 4) {
 
-			System.out.println("Du hast gewonnen!");
+			this.labelAktivit‰tR.setText("Du hast gewonnen!");
 
 		} else if (this.runde == 8) {
 
-			System.out.println("Codierer hat gewonnen!");
+			this.labelAktivit‰tR.setText("Codierer hat gewonnen!");
 		}
 		getRundeAnzeige().setText(getRundeAnzeigeText()[getRunde()]);
 
 		if (this.rightp == 4) {
-
-			System.out.println("Du hast gewonnen!");
 			this.kontroll1.setVisible(true);
 			this.kontroll2.setVisible(true);
 			this.kontroll3.setVisible(true);
 			this.kontroll4.setVisible(true);
 
 		} else if (this.runde == 8) {
-
-			System.out.println("Du hast verloren!");
 			this.kontroll1.setVisible(true);
 			this.kontroll2.setVisible(true);
 			this.kontroll3.setVisible(true);
@@ -543,16 +585,5 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		return true;
 
 	}
-	@Override
-	public boolean clientFarbData(int f1, int f2, int f3, int f4) throws RemoteException {
-		this.f1 = new Color(f1, true);
-		this.kontroll1.setBackground(this.f1);
-		this.f2 = new Color(f2, true);
-		this.kontroll2.setBackground(this.f2);
-		this.f3 = new Color(f3, true);
-		this.kontroll3.setBackground(this.f3);
-		this.f4 = new Color(f4, true);
-		this.kontroll4.setBackground(this.f4);
-		return true;
-	}
+
 }

@@ -1,6 +1,7 @@
 package MastermindMitRMI;
 
 import java.rmi.*;
+
 //Das Interface kümmert sich um die Daten, die der Ratende an den Codierer sendet
 public interface SpielInterface extends Remote {
 	public boolean starteSpiel(int starter) throws RemoteException;

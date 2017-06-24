@@ -15,6 +15,7 @@ public class Menue extends JFrame implements SpielInterface {
 	private int rightp;
 	private int rightc;
 	private int runde;
+	private int winner;
 
 	private JButton round;
 
@@ -65,7 +66,7 @@ public class Menue extends JFrame implements SpielInterface {
 		this.ordneKomponentenAn();
 		this.setVisible(true);
 	}
-	
+
 	// Initialisiert die Komponenten von Menue
 	private void initialisiereKomponenten() {
 		this.code = new Codierer();
@@ -118,9 +119,9 @@ public class Menue extends JFrame implements SpielInterface {
 
 	// Controlliert das Ergebnis der Runde (Die beiden Farbarrays)
 	private void round() {
-		if(code.getBestätigt()>=1){
-		vergleich();}
-		else
+		if (code.getBestätigt() >= 1) {
+			vergleich();
+		} else
 			System.out.println("Der Codierer muss seine Farbfolge bestätigen!");
 	}
 
@@ -148,12 +149,12 @@ public class Menue extends JFrame implements SpielInterface {
 	}
 
 	@Override
-	//Startet im Zusammenhang mit dem Server das Spiel
+	// Startet im Zusammenhang mit dem Server das Spiel
 	public boolean starteSpiel(int starter) throws RemoteException {
 		return true;
 	}
-	
-	//Verarbeitet die Daten, die der Server bekommt
+
+	// Verarbeitet die Daten, die der Server bekommt
 	@Override
 	public boolean spielzug(int f1, int f2, int f3, int f4) throws RemoteException {
 
@@ -161,12 +162,12 @@ public class Menue extends JFrame implements SpielInterface {
 		this.farbenRaten[1] = f2;
 		this.farbenRaten[2] = f3;
 		this.farbenRaten[3] = f4;
-
+		code.getLabelAktivität().setText(code.getAktivität()[1]);
 		return true;
 	}
-	
-	//Methode zum Vergleichen der Farbfolgen
-	public void vergleich() {	
+
+	// Methode zum Vergleichen der Farbfolgen
+	public void vergleich() {
 		this.rightc = 0;
 		this.rightp = 0;
 		for (int i = 0; i < code.getCcolor().length; i++) {
@@ -191,14 +192,21 @@ public class Menue extends JFrame implements SpielInterface {
 		this.runde++;
 
 		if (this.rightp == 4) {
-
-			System.out.println("Ratende hat gewonnen!");
+			this.winner = 1;
 
 		} else if (this.runde == 8) {
-
-			System.out.println("Du hast gewonnen!");
+			this.winner = -1;
 		}
+		code.getLabelAktivität().setText(code.getAktivität()[0]);
 
+	}
+
+	public void winner() {
+		if (this.winner == 1) {
+			this.getCode().getLabelAktivität().setText("Ratender hat gewonnen!");
+		} else if (this.winner == -1) {
+			this.getCode().getLabelAktivität().setText("Du hast gewonnen!");
+		}
 	}
 
 }
