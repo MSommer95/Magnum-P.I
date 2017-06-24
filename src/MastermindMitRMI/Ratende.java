@@ -31,11 +31,11 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	private String[] aktivitätR;
 	private String[] zeichen;
 	private String[] rundeAnzeigeText;
+	
 	private JLabel rundeAnzeige;
 	private JLabel labelSliderButton;
 	private JLabel labelSliderFarbe;
 	private JLabel labelAktivitätR;
-
 	private JLabel hilfe1;
 	private JLabel hilfe2;
 	private JLabel hilfe3;
@@ -87,12 +87,10 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 	private JButton dreißig;
 	private JButton einunddreißig;
 	private JButton zweiunddreißig;
-
 	private JButton kontroll1;
 	private JButton kontroll2;
 	private JButton kontroll3;
 	private JButton kontroll4;
-
 	private JButton bestätigen;
 
 	private JSlider sliderFarbe;
@@ -542,8 +540,6 @@ public class Ratende extends JFrame implements ClientCallbackInterface {
 		this.rightp = richtigP;
 		this.rightc = richtigC;
 		this.runde = runde;
-
-		System.out.println("Richtige Position: " + this.rightp + " richtige C: " + this.rightc);
 
 		if (this.rightp > 0) {
 

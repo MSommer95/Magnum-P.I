@@ -185,8 +185,6 @@ public class Menue extends JFrame implements SpielInterface {
 			}
 		}
 
-		System.out.println("Richtige Farbe " + this.rightc);
-		System.out.println("Richtige Position und Farbe " + this.rightp);
 		System.out.println("Daten bereit zum Senden!");
 
 		this.runde++;
